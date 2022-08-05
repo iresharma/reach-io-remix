@@ -1,0 +1,40 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "scripts": {
+    "build": "remix build",
+    "dev": "concurrently \"npm:sass\" \"npm:remix-dev\"",
+    "remix-dev": "remix dev",
+    "start": "cross-env NODE_ENV=production node ./server.js",
+    "sass": "sass --watch app/:app/"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.10.0",
+    "@emotion/server": "^11.10.0",
+    "@mantine/core": "^5.0.3",
+    "@mantine/dates": "^5.0.3",
+    "@mantine/dropzone": "^5.0.3",
+    "@mantine/form": "^5.0.3",
+    "@mantine/hooks": "^5.0.3",
+    "@mantine/notifications": "^5.0.3",
+    "@mantine/nprogress": "^5.0.3",
+    "@mantine/remix": "^5.0.3",
+    "@remix-run/node": "^1.6.7",
+    "@remix-run/react": "^1.6.7",
+    "@remix-run/serve": "^1.6.7",
+    "@tabler/icons": "^1.78.1",
+    "dayjs": "^1.11.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@remix-run/dev": "^1.6.7",
+    "@remix-run/eslint-config": "^1.6.7",
+    "concurrently": "^7.3.0",
+    "eslint": "^8.20.0",
+    "sass": "^1.54.3"
+  },
+  "engines": {
+    "node": ">=14"
+  }
+}
