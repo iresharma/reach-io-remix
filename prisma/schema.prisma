@@ -1,0 +1,39 @@
+datasource db {
+  provider             = "mysql"
+  url                  = env("DATABASE_URL")
+  referentialIntegrity = "prisma"
+}
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
+}
+
+model userAccount {
+  id           Int      @id @default(autoincrement())
+  account_name String   @unique
+  email        String   @unique
+  auth         Int
+  page         String
+  bucketId     String   @unique
+  created_at   DateTime @default(now())
+}
+
+model auth {
+  id       Int    @id @default(autoincrement())
+  email    String
+  passHash String
+  salt     String
+}
+
+model page {
+  id       Int    @id @default(autoincrement())
+  route    String @unique
+  template String
+  links    String
+}
+
+model bucket {
+  id    Int    @id @default(autoincrement())
+  files String
+}

@@ -1,6 +1,8 @@
 import { renderToString } from 'react-dom/server';
 import { RemixServer } from '@remix-run/react';
 import { injectStyles, createStylesServer } from '@mantine/remix';
+import dotenv from "dotenv";
+dotenv.config();
 
 const server = createStylesServer();
 

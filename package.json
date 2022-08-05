@@ -6,7 +6,7 @@
     "dev": "concurrently \"npm:sass\" \"npm:remix-dev\"",
     "remix-dev": "remix dev",
     "start": "cross-env NODE_ENV=production node ./server.js",
-    "sass": "sass --watch app/:app/"
+    "sass": "sass --watch app/:app/ --no-indented --no-source-map"
   },
   "dependencies": {
     "@emotion/react": "^11.10.0",
@@ -19,11 +19,13 @@
     "@mantine/notifications": "^5.0.3",
     "@mantine/nprogress": "^5.0.3",
     "@mantine/remix": "^5.0.3",
+    "@prisma/client": "^4.1.1",
     "@remix-run/node": "^1.6.7",
     "@remix-run/react": "^1.6.7",
     "@remix-run/serve": "^1.6.7",
     "@tabler/icons": "^1.78.1",
     "dayjs": "^1.11.4",
+    "dotenv": "^16.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -32,6 +34,7 @@
     "@remix-run/eslint-config": "^1.6.7",
     "concurrently": "^7.3.0",
     "eslint": "^8.20.0",
+    "prisma": "^4.1.1",
     "sass": "^1.54.3"
   },
   "engines": {
