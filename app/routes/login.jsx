@@ -2,12 +2,13 @@ import { TextInput, Button } from "@mantine/core";
 import { redirect } from "@remix-run/node";
 import { IconAt } from "@tabler/icons";
 import { Form } from "@remix-run/react";
+import { signIn } from "../services/auth.server";
 
 export const action = async ({ request }) => {
   return new Promise((resolve, reject) => {
     request.formData().then((data) => {
-      console.log(data.get("email"));
-      resolve(redirect("/"));
+      signIn(data.get("email"), data.get("password")); //email is required
+      resolve("hi");
     });
   });
 };
@@ -23,7 +24,7 @@ export default function Login() {
           radius="md"
           name="email"
         />
-        <input type="text" name="hello" />
+        <input type="text" name="password" />
         <Button type="submit" color="green" radius="md" size="lg">
           Login
         </Button>

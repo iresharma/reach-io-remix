@@ -1,5 +1,5 @@
 datasource db {
-  provider             = "mysql"
+  provider             = "mongodb"
   url                  = env("DATABASE_URL")
   referentialIntegrity = "prisma"
 }
@@ -9,31 +9,45 @@ generator client {
   previewFeatures = ["referentialIntegrity"]
 }
 
-model userAccount {
-  id           Int      @id @default(autoincrement())
+model UserAccount {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
   account_name String   @unique
   email        String   @unique
-  auth         Int
-  page         String
-  bucketId     String   @unique
   created_at   DateTime @default(now())
+  user         User?
+  page         page?
+  bucket       bucket?
 }
 
-model auth {
-  id       Int    @id @default(autoincrement())
-  email    String
+model User {
+  id            String      @id @default(auto()) @map("_id") @db.ObjectId
+  email         String      @unique
+  account       UserAccount @relation(fields: [userAccountId], references: [id])
+  auth          Auth        @relation(fields: [authId], references: [id])
+  authId        String      @unique @db.ObjectId
+  userAccountId String      @unique @db.ObjectId
+}
+
+model Auth {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  email    String @unique
   passHash String
   salt     String
+  user     User?
 }
 
 model page {
-  id       Int    @id @default(autoincrement())
-  route    String @unique
-  template String
-  links    String
+  id            String      @id @default(auto()) @map("_id") @db.ObjectId
+  route         String      @unique
+  template      String
+  links         String
+  account       UserAccount @relation(fields: [userAccountId], references: [id])
+  userAccountId String      @unique @db.ObjectId
 }
 
 model bucket {
-  id    Int    @id @default(autoincrement())
-  files String
+  id            String      @id @default(auto()) @map("_id") @db.ObjectId
+  files         String
+  account       UserAccount @relation(fields: [userAccountId], references: [id])
+  userAccountId String      @unique @db.ObjectId
 }

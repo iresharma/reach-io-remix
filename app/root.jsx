@@ -6,10 +6,10 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
-import {
-  MantineProvider,
-} from "@mantine/core";
+import { MantineProvider } from "@mantine/core";
 import { StylesPlaceholder } from "@mantine/remix";
+import { getSession } from "./session";
+import { redirect } from "@remix-run/node";
 
 import styles from "~/styles/components/logo.css";
 
@@ -28,7 +28,6 @@ export const links = () => {
     {
       rel: "preconnect",
       href: "https://fonts.gstatic.com",
-      crossOriginIsolated: true,
     },
     {
       rel: "stylesheet",
@@ -39,6 +38,17 @@ export const links = () => {
       href: styles,
     },
   ];
+};
+
+export const loader = async ({ request }) => {
+  const session = await getSession(request.headers.get("Cookie"));
+  if (!session.has("UserId")) {
+    if (request.url.split("/").pop() !== "login") {
+      return redirect("/login");
+    }
+    return "hi";
+  }
+  return session.get("UserId");
 };
 
 export default function App() {

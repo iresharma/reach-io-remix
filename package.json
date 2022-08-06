@@ -3,7 +3,7 @@
   "sideEffects": false,
   "scripts": {
     "build": "remix build",
-    "dev": "concurrently \"npm:sass\" \"npm:remix-dev\"",
+    "dev": "npx prisma generate && concurrently \"npm:sass\" \"npm:remix-dev\"",
     "remix-dev": "remix dev",
     "start": "cross-env NODE_ENV=production node ./server.js",
     "sass": "sass --watch app/:app/ --no-indented --no-source-map"
@@ -24,6 +24,7 @@
     "@remix-run/react": "^1.6.7",
     "@remix-run/serve": "^1.6.7",
     "@tabler/icons": "^1.78.1",
+    "bson": "^4.6.5",
     "dayjs": "^1.11.4",
     "dotenv": "^16.0.1",
     "react": "^18.2.0",
