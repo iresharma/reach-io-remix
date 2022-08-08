@@ -22,6 +22,7 @@ import {
 } from "@tabler/icons";
 import Logo from "../components/logo.component";
 import NavMenu from "../components/menu.component";
+import Footer from "../components/footer.component";
 
 import { useState } from "react";
 
@@ -181,6 +182,7 @@ export default function Home({ children }) {
           </div>
         </Header>
       }
+      footer={<Footer />}
     >
       {children}
     </AppShell>
