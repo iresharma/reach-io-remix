@@ -40,7 +40,6 @@ const bannerStyles = createStyles((theme) => ({
     color: theme.colorScheme === "dark" ? theme.white : theme.black,
     fontFamily: `Greycliff CF, ${theme.fontFamily}`,
     lineHeight: 1,
-    marginBottom: theme.spacing.md,
   },
 
   controls: {
@@ -96,6 +95,7 @@ export default function AItoolsPage() {
     <>
       <EmailBanner />
       <Features />
+
     </>
   );
 }

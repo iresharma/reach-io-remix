@@ -4,7 +4,6 @@ import {
   IconHome2,
   IconFolders,
   IconAt,
-  IconLogout,
   IconBrandEdge,
   IconAlien,
   IconFlame,
@@ -73,12 +72,6 @@ export default function Menu() {
             Hot New
           </Badge>
         }
-      />
-      <NavLink
-        label="Logout"
-        icon={<IconLogout size={16} stroke={1.5} />}
-        component="a"
-        href="/logout"
       />
     </Box>
   );

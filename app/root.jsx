@@ -7,7 +7,7 @@ import {
   ScrollRestoration,
   useCatch,
 } from "@remix-run/react";
-import { MantineProvider } from "@mantine/core";
+import { MantineProvider, ColorSchemeProvider } from "@mantine/core";
 import { StylesPlaceholder } from "@mantine/remix";
 import { getSession } from "./session";
 import { redirect } from "@remix-run/node";
@@ -76,7 +76,9 @@ export const CatchBoundary = () => {
       withGlobalStyles
       withNormalizeCSS
     >
-      <StylesPlaceholder />
+      <ColorSchemeProvider>
+        <StylesPlaceholder />
+      </ColorSchemeProvider>
       {retComponent(caught)}
     </MantineProvider>
   );
@@ -89,20 +91,22 @@ export default function App() {
       withGlobalStyles
       withNormalizeCSS
     >
-      <html lang="en">
-        <head>
-          <Meta />
-          <Links />
-          <StylesPlaceholder />
-        </head>
-        <body>
-          <Outlet />
-          <ScrollRestoration />
-          <GlobalProgress />
-          <Scripts />
-          <LiveReload />
-        </body>
-      </html>
+      <ColorSchemeProvider>
+        <html lang="en">
+          <head>
+            <Meta />
+            <Links />
+            <StylesPlaceholder />
+          </head>
+          <body>
+            <Outlet />
+            <ScrollRestoration />
+            <GlobalProgress />
+            <Scripts />
+            <LiveReload />
+          </body>
+        </html>
+      </ColorSchemeProvider>
     </MantineProvider>
   );
 }

@@ -106,6 +106,12 @@ const mockdata = [
     description: "Generates ideas based on topics and description.",
   },
   {
+    icon: IconBulb,
+    title: "Grammar Correction",
+    href: "/ai-tools/idea-brainstorming",
+    description: "Grammar corrects a paragraph or caption.",
+  },
+  {
     icon: IconBrandInstagram,
     title: "Instagram Caption generator",
     href: "/ai-tools/instagram-caption",
