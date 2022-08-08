@@ -7,9 +7,7 @@ const { getSession, commitSession, destroySession } =
     // a Cookie from `createCookie` or the CookieOptions to create one
     cookie: {
       name: "__session",
-      domain: "reach.io",
-      httpOnly: true,
-      maxAge: 60,
+      maxAge: 30 * 86400,
       path: "/",
       sameSite: "lax",
       secrets: [COOKIE_SECRET_KEY],

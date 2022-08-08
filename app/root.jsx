@@ -7,6 +7,7 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 import { MantineProvider } from "@mantine/core";
+import { NavigationProgress } from "@mantine/nprogress";
 import { StylesPlaceholder } from "@mantine/remix";
 import { getSession } from "./session";
 import { redirect } from "@remix-run/node";
@@ -42,13 +43,18 @@ export const links = () => {
 
 export const loader = async ({ request }) => {
   const session = await getSession(request.headers.get("Cookie"));
-  if (!session.has("UserId")) {
-    if (request.url.split("/").pop() !== "login") {
-      return redirect("/login");
+  console.log(session.get("userId"));
+  if (!session.has("userId")) {
+    if (
+      ["login", "register", "forgot-password"].includes(
+        request.url.split("/").pop()
+      )
+    ) {
+      return "hi";
     }
-    return "hi";
+    return redirect("/login");
   }
-  return session.get("UserId");
+  return session.get("userId");
 };
 
 export default function App() {
@@ -58,6 +64,7 @@ export default function App() {
       withGlobalStyles
       withNormalizeCSS
     >
+      <NavigationProgress />
       <html lang="en">
         <head>
           <Meta />

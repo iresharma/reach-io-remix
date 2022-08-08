@@ -14,18 +14,22 @@ model UserAccount {
   account_name String   @unique
   email        String   @unique
   created_at   DateTime @default(now())
-  user         User?
+  photoUrl     String?
+  user         User[]
+  owner        String   @db.ObjectId
   page         page?
   bucket       bucket?
 }
 
 model User {
-  id            String      @id @default(auto()) @map("_id") @db.ObjectId
-  email         String      @unique
-  account       UserAccount @relation(fields: [userAccountId], references: [id])
-  auth          Auth        @relation(fields: [authId], references: [id])
-  authId        String      @unique @db.ObjectId
-  userAccountId String      @unique @db.ObjectId
+  id            String       @id @default(auto()) @map("_id") @db.ObjectId
+  email         String       @unique
+  account       UserAccount? @relation(fields: [userAccountId], references: [id])
+  auth          Auth         @relation(fields: [authId], references: [id])
+  authId        String       @unique @db.ObjectId
+  userAccountId String?      @unique @db.ObjectId
+  name          String
+  photoUrl      String?
 }
 
 model Auth {

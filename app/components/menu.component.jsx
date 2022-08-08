@@ -48,13 +48,7 @@ export default function Menu() {
         rightSection={<IconChevronRight size={12} stroke={1.5} />}
         active
       />
-      <NavLink
-        label="Active filled"
-        icon={<IconActivity size={16} stroke={1.5} />}
-        rightSection={<IconChevronRight size={12} stroke={1.5} />}
-        variant="filled"
-        active
-      />
+      <a href="/logout">Logout</a>
     </Box>
   );
 }
