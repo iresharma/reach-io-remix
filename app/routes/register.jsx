@@ -103,7 +103,7 @@ export const action = async ({ request }) => {
     const userId = await register(...Object.values(data));
     const session = await getSession(request.headers.get("Cookie"));
     session.set("userId", userId);
-    return redirect("/", {
+    return redirect("/register/ua", {
       headers: {
         "Set-Cookie": await commitSession(session),
       },

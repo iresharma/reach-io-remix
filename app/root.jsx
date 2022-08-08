@@ -5,6 +5,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useCatch,
 } from "@remix-run/react";
 import { MantineProvider } from "@mantine/core";
 import { NavigationProgress } from "@mantine/nprogress";
@@ -13,6 +14,10 @@ import { getSession } from "./session";
 import { redirect } from "@remix-run/node";
 
 import styles from "~/styles/components/logo.css";
+
+import NotFoundPage from "./error/404";
+import ServerOverload from "./error/503";
+import OtherError from "./error/other";
 
 export const meta = () => ({
   charset: "utf-8",
@@ -55,6 +60,26 @@ export const loader = async ({ request }) => {
     return redirect("/login");
   }
   return session.get("userId");
+};
+
+const retComponent = (caught) => {
+  if (caught.status === 404) return <NotFoundPage />;
+  else if (caught.status === 503) return <ServerOverload />;
+  else return <OtherError />;
+};
+
+export const CatchBoundary = () => {
+  const caught = useCatch();
+  return (
+    <MantineProvider
+      theme={{ colorScheme: "dark" }}
+      withGlobalStyles
+      withNormalizeCSS
+    >
+      <StylesPlaceholder />
+      {retComponent(caught)}
+    </MantineProvider>
+  );
 };
 
 export default function App() {

@@ -70,7 +70,7 @@ export const action = async ({ request }) => {
     password: validatePassword(formData.password),
   };
   if (Object.values(formErrors).some(Boolean)) return { formErrors };
-  const auth = signIn(formData.email, formData.password);
+  const auth = await signIn(formData.email, formData.password);
   if (auth === 404) {
     formErrors.email = "Email not found";
     return { formErrors };
