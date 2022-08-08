@@ -1,0 +1,13 @@
+.wrapper {
+  display: flex;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 0.25rem;
+}
+.wrapper div {
+  background-image: linear-gradient(to right, #34d399, #3b82f6, #ec4899);
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+}

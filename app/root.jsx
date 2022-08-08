@@ -8,10 +8,10 @@ import {
   useCatch,
 } from "@remix-run/react";
 import { MantineProvider } from "@mantine/core";
-import { NavigationProgress } from "@mantine/nprogress";
 import { StylesPlaceholder } from "@mantine/remix";
 import { getSession } from "./session";
 import { redirect } from "@remix-run/node";
+import GlobalProgress from "./components/globalProgress.component";
 
 import styles from "~/styles/components/logo.css";
 
@@ -89,7 +89,6 @@ export default function App() {
       withGlobalStyles
       withNormalizeCSS
     >
-      <NavigationProgress />
       <html lang="en">
         <head>
           <Meta />
@@ -99,6 +98,7 @@ export default function App() {
         <body>
           <Outlet />
           <ScrollRestoration />
+          <GlobalProgress />
           <Scripts />
           <LiveReload />
         </body>
