@@ -1,4 +1,4 @@
-import { client as prisma } from "./index.database.server";
+import { prisma } from "./index.database.server";
 
 export const createAuth = (email, passHash, salt) => {
   return new Promise((resolve, reject) => {
@@ -27,11 +27,39 @@ export const createUser = (fname, lname, email, authId) => {
       .create({
         data: {
           email: email,
-          name: fname + lname,
+          name: fname + " " + lname,
           authId: authId,
         },
       })
       .then(resolve)
+      .catch(reject);
+  });
+};
+
+export const createUserAccount = (account_name, links, user) => {
+  return new Promise((resolve, reject) => {
+    prisma.userAccount
+      .create({
+        data: {
+          email: user.email,
+          links: links,
+          account_name: account_name,
+          owner: user.id,
+          created_at: new Date()
+        },
+      })
+      .then((data) => {
+        console.log(data)
+        prisma.user
+          .update({
+            where: { id: user.id },
+            data: {
+              userAccountId: data.id,
+            },
+          })
+          .then(resolve)
+          .catch(reject);
+      })
       .catch(reject);
   });
 };
@@ -61,5 +89,21 @@ export const getUser = (email) => {
       })
       .then(resolve)
       .catch(reject);
+  });
+};
+
+export const getUserById = (id) => {
+  console.log(id);
+  return new Promise((resolve, reject) => {
+    prisma.user
+      .findUniqueOrThrow({ where: { id: id } })
+      .then(resolve)
+      .catch(reject);
+  });
+};
+
+export const listUserAccounts = () => {
+  return new Promise((resolve, reject) => {
+    prisma.userAccount.findMany({}).then(resolve).catch(reject);
   });
 };

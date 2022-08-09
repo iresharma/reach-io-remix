@@ -37,7 +37,7 @@ export const links = () => {
     },
     {
       rel: "stylesheet",
-      href: "https://fonts.googleapis.com/css2?family=Pacifico&display=swap",
+      href: "https://fonts.googleapis.com/css2?family=Oleo+Script+Swash+Caps&display=swap",
     },
     {
       rel: "stylesheet",
@@ -59,6 +59,7 @@ export const loader = async ({ request }) => {
     }
     return redirect("/login");
   }
+
   return session.get("userId");
 };
 
@@ -72,7 +73,9 @@ export const CatchBoundary = () => {
   const caught = useCatch();
   return (
     <MantineProvider
-      theme={{ colorScheme: "dark" }}
+      theme={{
+        colorScheme: "dark",
+      }}
       withGlobalStyles
       withNormalizeCSS
     >

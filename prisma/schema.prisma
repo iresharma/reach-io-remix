@@ -19,6 +19,7 @@ model UserAccount {
   owner        String   @db.ObjectId
   page         page?
   bucket       bucket?
+  links        Json?
 }
 
 model User {

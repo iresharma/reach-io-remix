@@ -78,6 +78,10 @@ export const action = async ({ request }) => {
     console.log(auth);
     formErrors.password = "Invalid Credentials";
     return { formErrors };
+  } else if (auth === "Invalid username or password") {
+    console.log(auth);
+    formErrors.password = "Invalid Credentials";
+    return { formErrors };
   } else {
     const session = await getSession(request.headers.get("Cookie"));
     session.set("userId", auth);

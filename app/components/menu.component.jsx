@@ -7,6 +7,8 @@ import {
   IconBrandEdge,
   IconAlien,
   IconFlame,
+  IconCalendar,
+  IconBrandShopee,
 } from "@tabler/icons";
 import { useLocation } from "@remix-run/react";
 export default function Menu() {
@@ -36,6 +38,13 @@ export default function Menu() {
         active={location.includes("page")}
       />
       <NavLink
+        component="a"
+        href="/calendar"
+        label="Calendar"
+        icon={<IconCalendar size={16} stroke={1.5} />}
+        active={location.includes("calendar")}
+      />
+      <NavLink
         label="Mails"
         description="These are taken from a custom list in your email"
         icon={
@@ -55,6 +64,13 @@ export default function Menu() {
         component="a"
         href="/mails"
         active={location.includes("mails")}
+      />
+      <NavLink
+        component="a"
+        href="/store"
+        label="Store"
+        icon={<IconBrandShopee size={16} stroke={1.5} />}
+        active={location.includes("calendar")}
       />
       <NavLink
         component="a"

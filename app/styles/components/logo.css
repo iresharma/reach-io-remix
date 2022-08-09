@@ -1,7 +1,7 @@
 .logo {
-  background: linear-gradient(to right, #30cfd0 0%, #b170ff 100%);
+  background: linear-gradient(45deg, hsl(230deg, 92%, 85%) 0%, hsl(230deg, 57%, 53%) 25%, hsl(230deg, 92%, 85%) 50%, hsl(230deg, 69%, 61%) 75%, #bc1888 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  font-family: "Pacifico", cursive;
+  font-family: "Oleo Script Swash Caps", cursive;
   letter-spacing: 0.05em;
 }
