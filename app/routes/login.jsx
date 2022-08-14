@@ -70,7 +70,9 @@ export const action = async ({ request }) => {
     password: validatePassword(formData.password),
   };
   if (Object.values(formErrors).some(Boolean)) return { formErrors };
-  const auth = await signIn(formData.email, formData.password);
+  const auth = await signIn(formData.email, formData.password).catch((err) => {
+    throw new Error({ status: 503 });
+  });
   if (auth === 404) {
     formErrors.email = "Email not found";
     return { formErrors };
@@ -84,7 +86,8 @@ export const action = async ({ request }) => {
     return { formErrors };
   } else {
     const session = await getSession(request.headers.get("Cookie"));
-    session.set("userId", auth);
+    session.set("userId", auth.id);
+    session.set("account", auth.userData);
     return redirect("/", {
       headers: {
         "Set-Cookie": await commitSession(session),

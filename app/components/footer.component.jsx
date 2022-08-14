@@ -40,7 +40,7 @@ export default function FooterSocial() {
     <div className={classes.footer}>
       <Container className={classes.inner}>
         <small>
-          Made with love by{" "}
+          Made with ❤️ by{" "}
           <a
             style={{ color: "whitesmoke" }}
             href="https://iresharma.vercel.app"

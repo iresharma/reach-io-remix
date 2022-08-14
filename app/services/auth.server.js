@@ -6,11 +6,17 @@ export const signIn = async (email, password) => {
   if (auth === 404) {
     return "Invalid username or password";
   }
-  if (await verifyPassword(password, auth.passHash)) {
-    const { id } = await db.getUser(email);
-    return id;
-  } else {
-    return "Invalid Credentials";
+  try {
+    console.log(auth);
+    if (await verifyPassword(password, auth.passHash)) {
+      const { id, userAccountId } = await db.getUser(email);
+      const userData = await db.getUserAccountById(userAccountId);
+      return { id, userData };
+    } else {
+      return "Invalid Credentials";
+    }
+  } catch (err) {
+    throw new Error(err);
   }
 };
 

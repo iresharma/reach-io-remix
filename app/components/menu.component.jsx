@@ -70,7 +70,7 @@ export default function Menu() {
         href="/store"
         label="Store"
         icon={<IconBrandShopee size={16} stroke={1.5} />}
-        active={location.includes("calendar")}
+        active={location.includes("store")}
       />
       <NavLink
         component="a"

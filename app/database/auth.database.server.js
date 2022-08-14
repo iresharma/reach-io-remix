@@ -45,11 +45,10 @@ export const createUserAccount = (account_name, links, user) => {
           links: links,
           account_name: account_name,
           owner: user.id,
-          created_at: new Date()
+          created_at: new Date(),
         },
       })
       .then((data) => {
-        console.log(data)
         prisma.user
           .update({
             where: { id: user.id },
@@ -57,7 +56,7 @@ export const createUserAccount = (account_name, links, user) => {
               userAccountId: data.id,
             },
           })
-          .then(resolve)
+          .then((x) => resolve(data))
           .catch(reject);
       })
       .catch(reject);
@@ -93,9 +92,17 @@ export const getUser = (email) => {
 };
 
 export const getUserById = (id) => {
-  console.log(id);
   return new Promise((resolve, reject) => {
     prisma.user
+      .findUniqueOrThrow({ where: { id: id } })
+      .then(resolve)
+      .catch(reject);
+  });
+};
+
+export const getUserAccountById = (id) => {
+  return new Promise((resolve, reject) => {
+    prisma.userAccount
       .findUniqueOrThrow({ where: { id: id } })
       .then(resolve)
       .catch(reject);

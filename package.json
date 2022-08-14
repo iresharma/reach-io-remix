@@ -9,6 +9,7 @@
     "sass": "sass --watch app/:app/ --no-indented --no-source-map"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.145.0",
     "@emotion/react": "^11.10.0",
     "@emotion/server": "^11.10.0",
     "@fullcalendar/daygrid": "^5.11.2",

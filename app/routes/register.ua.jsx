@@ -14,11 +14,13 @@ import {
 import instaLogo from "../assets/images/instagram.png";
 import youtubeLogo from "../assets/images/youtube.png";
 import twitch from "../assets/images/twitch.png";
-import { getUserById } from "../database/auth.database.server";
-import { getSession } from "../session";
+import {
+  getUserById,
+  createUserAccount,
+} from "../database/auth.database.server";
+import { getSession, commitSession } from "../session";
 import { useLoaderData, Form } from "@remix-run/react";
 import { redirect } from "@remix-run/node";
-import { createUserAccount } from "../database/auth.database.server";
 
 const useStyles = createStyles((theme) => ({
   title: {
@@ -68,12 +70,20 @@ export const action = async ({ request }) => {
   };
   console.log(user);
   try {
-    await createUserAccount(formData.get("account_name"), links, user);
+    const accountData = await createUserAccount(
+      formData.get("account_name"),
+      links,
+      user
+    );
+    return redirect("/", {
+      headers: {
+        "Set-Cookie": await commitSession("account", accountData),
+      },
+    });
   } catch (err) {
     console.log(err);
     return "error";
   }
-  return redirect("/");
 };
 
 function UserInfoAction({ name, email, seed }) {
