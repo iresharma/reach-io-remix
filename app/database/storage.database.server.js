@@ -16,3 +16,12 @@ export const createBucket = (id) => {
       .catch(reject);
   });
 };
+
+export const fetchBucket = (id) => {
+  return new Promise((resolve, reject) => {
+    prisma.bucket
+      .findUnique({ where: { id: id } })
+      .then(resolve)
+      .catch(reject);
+  });
+};

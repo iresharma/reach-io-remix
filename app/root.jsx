@@ -12,6 +12,7 @@ import { StylesPlaceholder } from "@mantine/remix";
 import { getSession } from "./session";
 import { redirect } from "@remix-run/node";
 import GlobalProgress from "./components/globalProgress.component";
+import { SpotlightProvider } from '@mantine/spotlight';
 
 import styles from "~/styles/components/logo.css";
 
@@ -95,20 +96,22 @@ export default function App() {
       withNormalizeCSS
     >
       <ColorSchemeProvider>
-        <html lang="en">
-          <head>
-            <Meta />
-            <Links />
-            <StylesPlaceholder />
-          </head>
-          <body>
-            <Outlet />
-            <ScrollRestoration />
-            <GlobalProgress />
-            <Scripts />
-            <LiveReload />
-          </body>
-        </html>
+        <SpotlightProvider shortcut={["mod + P", "mod + K", "/"]} actions={[]}>
+          <html lang="en">
+            <head>
+              <Meta />
+              <Links />
+              <StylesPlaceholder />
+            </head>
+            <body>
+              <Outlet />
+              <ScrollRestoration />
+              <GlobalProgress />
+              <Scripts />
+              <LiveReload />
+            </body>
+          </html>
+        </SpotlightProvider>
       </ColorSchemeProvider>
     </MantineProvider>
   );

@@ -10,6 +10,8 @@ import {
   Avatar,
   UnstyledButton,
   Group,
+  TextInput,
+  Kbd,
 } from "@mantine/core";
 import {
   IconLogout,
@@ -19,10 +21,12 @@ import {
   IconSwitchHorizontal,
   IconChevronDown,
   IconBrandEdge,
+  IconSearch,
 } from "@tabler/icons";
 import Logo from "../components/logo.component";
 import NavMenu from "../components/menu.component";
 import Footer from "../components/footer.component";
+import { openSpotlight } from "@mantine/spotlight";
 
 import { useState } from "react";
 
@@ -96,7 +100,27 @@ export default function Home({ children }) {
               }}
             >
               <Logo />
-              <div>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  alignItems: "center",
+                  width: "100%",
+                }}
+              >
+                <TextInput
+                  placeholder="Search"
+                  icon={<IconSearch size={14} />}
+                  onClick={openSpotlight}
+                  onChange={openSpotlight}
+                  rightSection={
+                    <div style={{ display: "flex", alignItems: "center" }}>
+                      <Kbd>Ctrl</Kbd>
+                      <span style={{ margin: "0 5px" }}>+</span>
+                      <Kbd>K</Kbd>
+                    </div>
+                  }
+                />
                 <Menu
                   width={260}
                   position="bottom-end"
@@ -184,7 +208,7 @@ export default function Home({ children }) {
       }
       footer={<Footer />}
     >
-      {children}
+      <div style={{ overflow: "scroll" }}>{children}</div>
     </AppShell>
   );
 }

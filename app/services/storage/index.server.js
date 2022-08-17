@@ -23,6 +23,10 @@ const StorageRef = (function () {
       );
       return user;
     },
+    getStorageInfo: async ({ bucketId }) => {
+      const bucket = await db.fetchBucket(bucketId);
+      return bucket;
+    },
   };
 })();
 
