@@ -9,7 +9,6 @@
     "sass": "sass --watch app/:app/ --no-indented --no-source-map"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.145.0",
     "@emotion/react": "^11.10.0",
     "@emotion/server": "^11.10.0",
     "@fullcalendar/daygrid": "^5.11.2",
@@ -28,6 +27,7 @@
     "@remix-run/react": "^1.6.7",
     "@remix-run/serve": "^1.6.7",
     "@tabler/icons": "^1.78.1",
+    "aws-sdk": "^2.1197.0",
     "bcrypt": "^5.0.1",
     "bson": "^4.6.5",
     "chroma-js": "^2.4.2",

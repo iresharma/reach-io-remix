@@ -51,7 +51,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export default function ServerError() {
+export default function ServerError({ error }) {
   const { classes } = useStyles();
 
   return (
@@ -63,6 +63,7 @@ export default function ServerError() {
           Our servers could not handle your request. Don&apos;t worry, our
           development team was already notified. Try refreshing the page.
         </Text>
+        <pre style={{ font: "monospace" }}>{error.message}</pre>
         <Group position="center">
           <Button variant="white" size="md">
             Refresh the page

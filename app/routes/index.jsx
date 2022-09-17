@@ -12,14 +12,12 @@ export default function HomePage() {
   const data = useLoaderData();
   return (
     <DashLayout>
-      <div>
-        <h1>Team: {data.userData.account_name}</h1>
-        <pre>{JSON.stringify(data, null, 4)}</pre>
-        <h3>Current Plans</h3>
-        <ul>
-          <li>Welcome message</li>
-        </ul>
-      </div>
+      <h1>Team: {data.userData.account_name}</h1>
+      <pre>{JSON.stringify(data, null, 4)}</pre>
+      <h3>Current Plans</h3>
+      <ul>
+        <li>Welcome message</li>
+      </ul>
     </DashLayout>
   );
 }

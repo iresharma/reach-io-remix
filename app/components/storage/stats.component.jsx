@@ -46,8 +46,54 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export default function StatsRingCard({ title, used, total, stats }) {
-  const { classes, theme } = useStyles();
+// export const loader = () => {
+//   console.log('hi')
+
+//   return { used, total, stats };
+// };
+
+let used = 945;
+let total = 15 * 1024;
+let stats = [
+  {
+    label: "Photos",
+    value: 245,
+    color: "#FA5252",
+  },
+  {
+    label: "Documents",
+    value: 17,
+    color: "#FAB005",
+  },
+  {
+    label: "Videos",
+    value: 34,
+    color: "#228BE6",
+  },
+  {
+    label: "Project Files",
+    value: 150,
+    color: "#40C057",
+  },
+  {
+    label: "Presentations",
+    value: 34,
+    color: "#E64980",
+  },
+  {
+    label: "SpreadSheets",
+    value: 78,
+    color: "#40C057",
+  },
+  {
+    label: "photos",
+    value: 123,
+    color: "#12B886",
+  },
+];
+
+export default function StatsRingCard() {
+  const { classes } = useStyles();
   const items = stats.map((stat) => (
     <div style={{ display: "flex" }} key={stat.label}>
       <ColorSwatch color={stat.color} sx={{ transform: "scale(0.5)" }} />
@@ -68,7 +114,7 @@ export default function StatsRingCard({ title, used, total, stats }) {
       <div className={classes.inner}>
         <div>
           <Text size="xl" className={classes.label}>
-            {title}
+            Storage Stats
           </Text>
           <div style={{ display: "flex" }}>
             <div style={{ width: "110px" }}>

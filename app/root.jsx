@@ -12,7 +12,7 @@ import { StylesPlaceholder } from "@mantine/remix";
 import { getSession } from "./session";
 import { redirect } from "@remix-run/node";
 import GlobalProgress from "./components/globalProgress.component";
-import { SpotlightProvider } from '@mantine/spotlight';
+import { SpotlightProvider } from "@mantine/spotlight";
 
 import styles from "~/styles/components/logo.css";
 
@@ -65,9 +65,9 @@ export const loader = async ({ request }) => {
 };
 
 const retComponent = (caught) => {
-  if (caught.status === 404) return <NotFoundPage />;
-  else if (caught.status === 503) return <ServerOverload />;
-  else return <OtherError />;
+  if (caught.status === 404) return <NotFoundPage error={caught} />;
+  else if (caught.status === 503) return <ServerOverload error={caught} />;
+  else return <OtherError error={caught} />;
 };
 
 export const CatchBoundary = () => {
@@ -75,7 +75,7 @@ export const CatchBoundary = () => {
   return (
     <MantineProvider
       theme={{
-        colorScheme: "dark",
+        colorScheme: "light",
       }}
       withGlobalStyles
       withNormalizeCSS
@@ -88,10 +88,27 @@ export const CatchBoundary = () => {
   );
 };
 
+export const ErrorBoundary = ({ error }) => {
+  return (
+    <MantineProvider
+      theme={{
+        colorScheme: "light",
+      }}
+      withGlobalStyles
+      withNormalizeCSS
+    >
+      <ColorSchemeProvider>
+        <StylesPlaceholder />
+      </ColorSchemeProvider>
+      {retComponent(error)}
+    </MantineProvider>
+  );
+};
+
 export default function App() {
   return (
     <MantineProvider
-      theme={{ colorScheme: "dark" }}
+      theme={{ colorScheme: "light" }}
       withGlobalStyles
       withNormalizeCSS
     >

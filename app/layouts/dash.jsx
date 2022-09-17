@@ -100,109 +100,121 @@ export default function Home({ children }) {
               }}
             >
               <Logo />
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "flex-end",
-                  alignItems: "center",
-                  width: "100%",
-                }}
-              >
-                <TextInput
-                  placeholder="Search"
-                  icon={<IconSearch size={14} />}
-                  onClick={openSpotlight}
-                  onChange={openSpotlight}
-                  rightSection={
-                    <div style={{ display: "flex", alignItems: "center" }}>
-                      <Kbd>Ctrl</Kbd>
-                      <span style={{ margin: "0 5px" }}>+</span>
-                      <Kbd>K</Kbd>
-                    </div>
-                  }
-                />
-                <Menu
-                  width={260}
-                  position="bottom-end"
-                  transition="pop-top-right"
-                  onClose={() => setUserMenuOpened(false)}
-                  onOpen={() => setUserMenuOpened(true)}
+              <MediaQuery largerThan="lg" styles={{ display: "none" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "flex-end",
+                    alignItems: "center",
+                    width: "100%",
+                  }}
                 >
-                  <Menu.Target>
-                    <UnstyledButton
-                      className={cx(classes.user, {
-                        [classes.userActive]: userMenuOpened,
-                      })}
-                    >
-                      <Group spacing={7}>
-                        <Avatar
-                          src={user.image}
-                          alt={user.name}
-                          radius="xl"
-                          size={20}
-                        />
-                        <Text
-                          weight={500}
-                          size="sm"
-                          sx={{ lineHeight: 1, color: theme.white }}
-                          mr={3}
-                        >
-                          {user.name}
-                        </Text>
-                        <IconChevronDown size={12} stroke={1.5} />
-                      </Group>
-                    </UnstyledButton>
-                  </Menu.Target>
-                  <Menu.Dropdown>
-                    <Menu.Item
-                      icon={
-                        <IconBrandEdge
-                          size={14}
-                          stroke={1.5}
-                          color={theme.colors.red[6]}
-                        />
-                      }
-                    >
-                      Got to page
-                    </Menu.Item>
-                    <Menu.Item
-                      icon={
-                        <IconStar
-                          size={14}
-                          stroke={1.5}
-                          color={theme.colors.yellow[6]}
-                        />
-                      }
-                    >
-                      Stared Storage
-                    </Menu.Item>
+                  <TextInput
+                    placeholder="Search"
+                    icon={<IconSearch size={14} />}
+                    onClick={openSpotlight}
+                    onChange={openSpotlight}
+                    rightSection={
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          width: "20ch",
+                        }}
+                      >
+                        <Kbd>⌘</Kbd> <Kbd>K</Kbd>
+                      </div>
+                    }
+                  />
+                  <Menu
+                    width={260}
+                    position="bottom-end"
+                    transition="pop-top-right"
+                    onClose={() => setUserMenuOpened(false)}
+                    onOpen={() => setUserMenuOpened(true)}
+                  >
+                    <Menu.Target>
+                      <UnstyledButton
+                        className={cx(classes.user, {
+                          [classes.userActive]: userMenuOpened,
+                        })}
+                      >
+                        <Group spacing={7}>
+                          <Avatar
+                            src={user.image}
+                            alt={user.name}
+                            radius="xl"
+                            size={20}
+                          />
+                          <Text
+                            weight={500}
+                            size="sm"
+                            sx={{ lineHeight: 1, color: theme.white }}
+                            mr={3}
+                          >
+                            {user.name}
+                          </Text>
+                          <IconChevronDown size={12} stroke={1.5} />
+                        </Group>
+                      </UnstyledButton>
+                    </Menu.Target>
+                    <Menu.Dropdown>
+                      <Menu.Item
+                        icon={
+                          <IconBrandEdge
+                            size={14}
+                            stroke={1.5}
+                            color={theme.colors.red[6]}
+                          />
+                        }
+                      >
+                        Got to page
+                      </Menu.Item>
+                      <Menu.Item
+                        icon={
+                          <IconStar
+                            size={14}
+                            stroke={1.5}
+                            color={theme.colors.yellow[6]}
+                          />
+                        }
+                      >
+                        Stared Storage
+                      </Menu.Item>
 
-                    <Menu.Label>Settings</Menu.Label>
-                    <Menu.Item icon={<IconSettings size={14} stroke={1.5} />}>
-                      Account settings
-                    </Menu.Item>
+                      <Menu.Label>Settings</Menu.Label>
+                      <Menu.Item icon={<IconSettings size={14} stroke={1.5} />}>
+                        Account settings
+                      </Menu.Item>
 
-                    <Menu.Item
-                      icon={<IconPlayerPause size={14} stroke={1.5} />}
-                    >
-                      Pause subscription
-                    </Menu.Item>
-                    <Menu.Item
-                      icon={<IconSwitchHorizontal size={14} stroke={1.5} />}
-                    >
-                      Change account
-                    </Menu.Item>
-                    <Menu.Item
-                      component="a"
-                      href="/logout"
-                      icon={<IconLogout size={14} stroke={1.5} />}
-                    >
-                      Logout
-                    </Menu.Item>
-                  </Menu.Dropdown>
-                </Menu>
-              </div>
+                      <Menu.Item
+                        icon={<IconPlayerPause size={14} stroke={1.5} />}
+                      >
+                        Pause subscription
+                      </Menu.Item>
+                      <Menu.Item
+                        icon={<IconSwitchHorizontal size={14} stroke={1.5} />}
+                      >
+                        Change account
+                      </Menu.Item>
+                      <Menu.Item
+                        component="a"
+                        href="/logout"
+                        icon={<IconLogout size={14} stroke={1.5} />}
+                      >
+                        Logout
+                      </Menu.Item>
+                    </Menu.Dropdown>
+                  </Menu>
+                </div>
+              </MediaQuery>
             </div>
+            <MediaQuery largerThan="sm" styles={{ display: "none" }}>
+              <span>
+                <IconSearch size={16} />
+                <Kbd>⌘</Kbd> <Kbd>K</Kbd>
+              </span>
+            </MediaQuery>
           </div>
         </Header>
       }

@@ -18,9 +18,9 @@ model UserAccount {
   user         User[]
   owner        String   @db.ObjectId
   page         page?
-  bucket       bucket   @relation(fields: [bucketId], references: [id])
+  bucket       bucket?   @relation(fields: [bucketId], references: [id])
   links        Json?
-  bucketId     String   @unique @db.ObjectId
+  bucketId     String?   @unique @db.ObjectId
 }
 
 model User {
