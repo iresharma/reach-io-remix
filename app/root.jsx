@@ -8,6 +8,7 @@ import {
   useCatch,
 } from "@remix-run/react";
 import { MantineProvider, ColorSchemeProvider } from "@mantine/core";
+import { NotificationsProvider } from '@mantine/notifications';
 import { StylesPlaceholder } from "@mantine/remix";
 import { getSession } from "./session";
 import { redirect } from "@remix-run/node";
@@ -122,31 +123,36 @@ export default function App() {
             "#047857",
             "#065f46",
             "#064e3b",
-          ]
+          ],
         },
-        primaryColor: 'brand',
-        defaultRadius: 'md'
+        primaryColor: "brand",
+        defaultRadius: "md",
       }}
       withGlobalStyles
       withNormalizeCSS
     >
       <ColorSchemeProvider>
-        <SpotlightProvider shortcut={["mod + P", "mod + K", "/"]} actions={[]}>
-          <html lang="en">
-            <head>
-              <Meta />
-              <Links />
-              <StylesPlaceholder />
-            </head>
-            <body>
-              <Outlet />
-              <ScrollRestoration />
-              <GlobalProgress />
-              <Scripts />
-              <LiveReload />
-            </body>
-          </html>
-        </SpotlightProvider>
+        <NotificationsProvider>
+          <SpotlightProvider
+            shortcut={["mod + P", "mod + K", "/"]}
+            actions={[]}
+          >
+            <html lang="en">
+              <head>
+                <Meta />
+                <Links />
+                <StylesPlaceholder />
+              </head>
+              <body>
+                <Outlet />
+                <ScrollRestoration />
+                <GlobalProgress />
+                <Scripts />
+                <LiveReload />
+              </body>
+            </html>
+          </SpotlightProvider>
+        </NotificationsProvider>
       </ColorSchemeProvider>
     </MantineProvider>
   );

@@ -2,23 +2,20 @@ import * as s3 from "../aws/s3.aws.server";
 import * as db from "../../database/storage.database.server";
 
 const StorageRef = (function () {
-  var client;
-
   return {
-    getInstance: () => {
-      if (!client) {
-        client = s3.createClient();
-      }
-      return client;
-    },
     initializeStorage: async (userAccount) => {
-      const storageBucket = await s3
-        .createBucket(StorageRef.getInstance(), userAccount)
-        .catch(console.error);
-      console.log(storageBucket);
+      try {
+        const storageBucket = await s3
+          .createBucket(userAccount).catch(error => {
+            console.log(error);
+            return null;
+          })
+        if (!storageBucket) return null;
+      } catch (error) {
+        return null;
+      }
       const { user } = await db.createBucket(
         userAccount.id,
-        `reach-io-customer-${userAccount.id}-${userAccount.account_name}`
       );
       return user;
     },
@@ -30,7 +27,6 @@ const StorageRef = (function () {
       const bucketName = `reach-io-customer-${account.id}-${account.account_name}`;
       console.log(bucketName);
       const fileUploadOutput = await s3.uploadFile(
-        StorageRef.getInstance(),
         bucketName,
         '/',
         file,

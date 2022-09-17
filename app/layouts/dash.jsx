@@ -248,7 +248,7 @@ export default function Home({ children }) {
       footer={<Footer />}
     >
       <Box
-        sx={(theme) => ({ backgroundColor: theme.colors.brand[1], margin: '0', padding: theme.spacing.sm })}
+        sx={(theme) => ({ backgroundColor: theme.colors.brand[1], margin: 0, padding: theme.spacing.sm })}
         style={{ overflow: "scroll" }}
       >
         {children}

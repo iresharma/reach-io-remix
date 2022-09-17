@@ -13,6 +13,10 @@ import {
 import { useLocation } from "@remix-run/react";
 
 const sx = (theme) => ({
+  "&[data-active]": {
+    border: `1px solid ${theme.colors.brand[9]}`,
+    color: `${theme.colors.brand[9]} !important`,
+  },
   "&:hover": {
     backgroundColor: theme.colors.brand[9],
     color: "white",
@@ -24,12 +28,11 @@ const sx = (theme) => ({
     color: theme.colors.brand[8],
   },
   borderRadius: theme.radius.md,
-  margin: '5px 0'
+  margin: "5px 0",
 });
 
 export default function Menu() {
   const location = useLocation().pathname.split("/");
-  console.log(location);
   return (
     <Box sx={{ width: { sm: 200, lg: 300 } }}>
       <NavLink
