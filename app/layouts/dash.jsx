@@ -12,6 +12,7 @@ import {
   Group,
   TextInput,
   Kbd,
+  Box,
 } from "@mantine/core";
 import {
   IconLogout,
@@ -69,12 +70,23 @@ export default function Home({ children }) {
           hiddenBreakpoint="sm"
           hidden={!opened}
           width={{ sm: 200, lg: 300 }}
+          sx={(theme) => ({
+            background: theme.colors.brand[4],
+            borderColor: theme.colors.brand[9],
+          })}
         >
           <NavMenu />
         </Navbar>
       }
       header={
-        <Header height={70} p="md">
+        <Header
+          height={70}
+          p="md"
+          sx={(theme) => ({
+            background: theme.colors.brand[4],
+            borderColor: theme.colors.brand[9],
+          })}
+        >
           <div
             style={{
               display: "flex",
@@ -110,6 +122,20 @@ export default function Home({ children }) {
                   }}
                 >
                   <TextInput
+                    sx={(theme) => ({
+                      backgroundColor: theme.colors.brand[2],
+                      borderRadius: theme.radius.md,
+                      ".mantine-Input-wrapper": {
+                        width: "30ch",
+                      },
+                      "input[type=text]": {
+                        backgroundColor: theme.colors.brand[2],
+                      },
+                      ".mantine-TextInput-rightSection": {
+                        width: "7ch",
+                        paddingRight: "1ch",
+                      },
+                    })}
                     placeholder="Search"
                     icon={<IconSearch size={14} />}
                     onClick={openSpotlight}
@@ -119,10 +145,9 @@ export default function Home({ children }) {
                         style={{
                           display: "flex",
                           alignItems: "center",
-                          width: "20ch",
                         }}
                       >
-                        <Kbd>⌘</Kbd> <Kbd>K</Kbd>
+                        <Kbd>⌘ + K</Kbd>
                       </div>
                     }
                   />
@@ -132,6 +157,7 @@ export default function Home({ children }) {
                     transition="pop-top-right"
                     onClose={() => setUserMenuOpened(false)}
                     onOpen={() => setUserMenuOpened(true)}
+                    sx={theme => ({marginLeft: theme.spacing.md})}
                   >
                     <Menu.Target>
                       <UnstyledButton
@@ -145,11 +171,12 @@ export default function Home({ children }) {
                             alt={user.name}
                             radius="xl"
                             size={20}
+                            color="brand"
                           />
                           <Text
                             weight={500}
                             size="sm"
-                            sx={{ lineHeight: 1, color: theme.white }}
+                            sx={theme => ({ lineHeight: 1, color: theme.colors.brand[9] })}
                             mr={3}
                           >
                             {user.name}
@@ -168,7 +195,7 @@ export default function Home({ children }) {
                           />
                         }
                       >
-                        Got to page
+                        Go to page
                       </Menu.Item>
                       <Menu.Item
                         icon={
@@ -220,7 +247,12 @@ export default function Home({ children }) {
       }
       footer={<Footer />}
     >
-      <div style={{ overflow: "scroll" }}>{children}</div>
+      <Box
+        sx={(theme) => ({ backgroundColor: theme.colors.brand[1], margin: '0', padding: theme.spacing.sm })}
+        style={{ overflow: "scroll" }}
+      >
+        {children}
+      </Box>
     </AppShell>
   );
 }

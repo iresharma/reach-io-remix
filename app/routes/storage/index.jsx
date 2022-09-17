@@ -65,7 +65,7 @@ const sx = (theme) => ({
   },
 
   "&[data-accept]": {
-    border: `2px dashed ${theme.colors.blue[9]}`,
+    border: `2px dashed ${theme.colors.blue[7]}`,
   },
 
   "&[data-reject]": {

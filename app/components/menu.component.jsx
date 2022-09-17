@@ -11,12 +11,29 @@ import {
   IconBrandShopee,
 } from "@tabler/icons";
 import { useLocation } from "@remix-run/react";
+
+const sx = (theme) => ({
+  "&:hover": {
+    backgroundColor: theme.colors.brand[9],
+    color: "white",
+    ".mantine-NavLink-description": {
+      color: "white",
+    },
+  },
+  ".mantine-NavLink-description": {
+    color: theme.colors.brand[8],
+  },
+  borderRadius: theme.radius.md,
+  margin: '5px 0'
+});
+
 export default function Menu() {
   const location = useLocation().pathname.split("/");
   console.log(location);
   return (
     <Box sx={{ width: { sm: 200, lg: 300 } }}>
       <NavLink
+        sx={sx}
         component="a"
         href="/"
         label="Home"
@@ -24,6 +41,7 @@ export default function Menu() {
         active={location.every((val) => val === "")}
       />
       <NavLink
+        sx={sx}
         component="a"
         href="/storage"
         label="Storage"
@@ -31,6 +49,7 @@ export default function Menu() {
         active={location.includes("storage")}
       />
       <NavLink
+        sx={sx}
         component="a"
         href="/page"
         label="Page"
@@ -38,6 +57,7 @@ export default function Menu() {
         active={location.includes("page")}
       />
       <NavLink
+        sx={sx}
         component="a"
         href="/calendar"
         label="Calendar"
@@ -61,11 +81,13 @@ export default function Menu() {
             </Badge>
           )
         }
+        sx={sx}
         component="a"
         href="/mails"
         active={location.includes("mails")}
       />
       <NavLink
+        sx={sx}
         component="a"
         href="/store"
         label="Store"
@@ -73,6 +95,7 @@ export default function Menu() {
         active={location.includes("store")}
       />
       <NavLink
+        sx={sx}
         component="a"
         href="/ai-tools"
         active={location.includes("ai-tools")}

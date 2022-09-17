@@ -47,7 +47,7 @@ const useStyles = createStyles((theme) => ({
     margin: "auto",
     marginTop: theme.spacing.xl,
     marginBottom: theme.spacing.xl * 1.5,
-    color: theme.colors[theme.primaryColor][1],
+    color: theme.colors[theme.primaryColor][7],
   },
 }));
 

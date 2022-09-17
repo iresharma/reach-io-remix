@@ -21,7 +21,7 @@ const useStyles = createStyles((theme) => ({
     marginBottom: theme.spacing.xl * 1.5,
     color:
       theme.colorScheme === "dark"
-        ? theme.colors.dark[4]
+        ? theme.colors.dark[7]
         : theme.colors.gray[2],
 
     [theme.fn.smallerThan("sm")]: {
