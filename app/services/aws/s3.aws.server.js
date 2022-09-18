@@ -23,9 +23,9 @@ export const createBucket = async ({ account_name, id }) => {
   });
 };
 
-export const putPresignedURL = (bucketName) => {
+export const putPresignedURL = (bucketName, file) => {
   return new Promise((resolve, reject) => {
-    client.createPresignedPost({ Bucket: bucketName }, (err, data) => {
+  client.createPresignedPost({ Bucket: bucketName,  }, (err, data) => {
       if (err) reject(err);
       resolve(data);
     })
