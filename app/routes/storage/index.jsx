@@ -1,18 +1,17 @@
 import {
   redirect,
   unstable_parseMultipartFormData,
-  unstable_composeUploadHandlers,
-  unstable_createMemoryUploadHandler,
+  unstable_createFileUploadHandler,
 } from "@remix-run/node";
 import { getSession } from "../../session";
 import DashLayout from "../../layouts/dash";
-import { Dropzone } from "@mantine/dropzone";
 import { useState, useRef } from "react";
 import StatsRingCard from "../../components/storage/stats.component";
 import { Anchor, Breadcrumbs, Button } from "@mantine/core";
 import StorageRef from "../../services/storage/index.server";
 import { Form, useLoaderData } from "@remix-run/react";
 import { IconFolderPlus, IconUpload } from "@tabler/icons";
+import DropZone from "../../components/storage/dropzone.component";
 
 export const loader = async ({ request }) => {
   const session = await getSession(request.headers.get("Cookie"));
@@ -26,19 +25,10 @@ export const loader = async ({ request }) => {
 export const action = async ({ request }) => {
   const session = await getSession(request.headers.get("Cookie"));
   const account = session.get("account");
-  switch (request.method) {
-    case "POST":
-      const formData = await unstable_parseMultipartFormData(
-        request,
-        unstable_composeUploadHandlers(async ({ data, filename }) => {
-          StorageRef.uploadFile({ account, data, filename });
-        }, unstable_createMemoryUploadHandler()) // <-- we'll look at this deeper next
-      );
-      return "hi";
-    default:
-      break;
-  }
-  return "hi";
+  const { files } = await request.json();
+  console.log(files);
+  StorageRef.uploadFile({ account, files });
+  return {};
 };
 
 const items = [
@@ -51,35 +41,21 @@ const items = [
   </Anchor>
 ));
 
-const sx = (theme) => ({
-  minHeight: "70vh",
-  height: "100%",
-  border: 0,
-  backgroundColor: "transparent",
-
-  "&:hover": {
-    backgroundColor:
-      theme.colorScheme === "dark"
-        ? theme.colors.dark[7]
-        : theme.colors.gray[0],
-  },
-
-  "&[data-accept]": {
-    border: `2px dashed ${theme.colors.blue[7]}`,
-  },
-
-  "&[data-reject]": {
-    color: theme.white,
-    backgroundColor: theme.colors.red[6],
-  },
-});
+const onHandleChange = (acceptedFiles) => {
+  if (!acceptedFiles) return;
+  const files = acceptedFiles.map((el) => el.name);
+  console.log(files);
+  fetch("/storage?index", {
+    method: "POST",
+    body: JSON.stringify({ files }),
+  });
+};
 
 export default function StoragePage() {
   const data = useLoaderData();
   const form = useRef();
   return (
     <DashLayout>
-      <pre>{JSON.stringify(data, null, 4)}</pre>
       <StatsRingCard title="Storage Stats" />
 
       <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -90,11 +66,7 @@ export default function StoragePage() {
         </Button>
       </div>
       <Form ref={form} method="post" encType="multipart/form-data">
-        <Dropzone sx={sx} name="files" onDrop={() => form.current.submit()}>
-          <Dropzone.Accept>
-            <IconUpload size={50} stroke={1.5} />
-          </Dropzone.Accept>
-        </Dropzone>
+        <DropZone onHandleChange={onHandleChange} />
       </Form>
     </DashLayout>
   );

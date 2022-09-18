@@ -11,6 +11,8 @@ const useStyles = createStyles((theme) => ({
   card: {
     backgroundColor:
       theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
+      border: `1px solid ${theme.colors.brand[9]}`,
+      borderRadius: theme.radius.xl
   },
 
   label: {

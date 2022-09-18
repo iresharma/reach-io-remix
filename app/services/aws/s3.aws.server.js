@@ -23,23 +23,11 @@ export const createBucket = async ({ account_name, id }) => {
   });
 };
 
-export const uploadFile = (bucketName, path, file, filename) => {
+export const putPresignedURL = (bucketName) => {
   return new Promise((resolve, reject) => {
-    var fileStream = fs.createReadStream(file);
-    fileStream.on('error', function (err) {
-      console.log('File Error', err);
-    });
-    client.putObject(
-      {
-        Bucket: bucketName,
-        Key: `${path}${filename}`,
-        Body: fileStream,
-      },
-      (err, result) => {
-        console.log(err);
-        console.log(result);
-        resolve();
-      }
-    );
+    client.createPresignedPost({ Bucket: bucketName }, (err, data) => {
+      if (err) reject(err);
+      resolve(data);
+    })
   });
 };

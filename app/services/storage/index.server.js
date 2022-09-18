@@ -23,16 +23,11 @@ const StorageRef = (function () {
       const bucket = await db.fetchBucket(bucketId);
       return bucket;
     },
-    uploadFile: async ({ account, file, filename }) => {
-      const bucketName = `reach-io-customer-${account.id}-${account.account_name}`;
-      console.log(bucketName);
-      const fileUploadOutput = await s3.uploadFile(
-        bucketName,
-        '/',
-        file,
-        filename
-      );
-      console.log(fileUploadOutput);
+    uploadFile: async ({ account }) => {
+      const bucketName = `customer-${account.account_name.toLowerCase().replace('@', '-')}`;
+      const url = await s3.putPresignedURL(bucketName);
+      console.log(url)
+      return url;
     },
   };
 })();
