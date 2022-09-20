@@ -52,6 +52,7 @@ export default function StoragePage() {
       Object.entries(amz.fields).forEach(([field, value]) => {
         form.append(field, value);
       });
+      form.append("key", acceptedFiles[index].name);
       form.append("file", acceptedFiles[index]);
       Axios.post(amz.url, form)
         .then(console.log)

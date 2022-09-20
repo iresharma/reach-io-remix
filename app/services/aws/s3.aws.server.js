@@ -24,7 +24,7 @@ export const createBucket = async ({ id }) => {
 };
 
 export const putPresignedURL = (bucketName, file) => {
-  const Conditions = [{ acl: "public-read" }, { bucket: "johnsmith" }, ["starts-with", "$key", file]];
+  const Conditions = [{ acl: "public-read" }, { bucket: bucketName }, ["starts-with", "$key", file]];
   return new Promise((resolve, reject) => {
     client.createPresignedPost({
       Bucket: bucketName, Key: file, Conditions, Fields: {
