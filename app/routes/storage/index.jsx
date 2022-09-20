@@ -10,8 +10,10 @@ import StatsRingCard from "../../components/storage/stats.component";
 import { Anchor, Breadcrumbs, Button } from "@mantine/core";
 import StorageRef from "../../services/storage/index.server";
 import { Form, useLoaderData } from "@remix-run/react";
-import { IconFolderPlus, IconUpload } from "@tabler/icons";
+import { IconFolderPlus, IconError404 } from "@tabler/icons";
 import DropZone from "../../components/storage/dropzone.component";
+import { showNotification } from "@mantine/notifications";
+import Axios from "axios";
 
 export const loader = async ({ request }) => {
   const session = await getSession(request.headers.get("Cookie"));
@@ -20,15 +22,6 @@ export const loader = async ({ request }) => {
     return redirect("/storage/new");
   }
   return StorageRef.getStorageInfo(account);
-};
-
-export const action = async ({ request }) => {
-  const session = await getSession(request.headers.get("Cookie"));
-  const account = session.get("account");
-  const { files } = await request.json();
-  console.log(files);
-  StorageRef.uploadFile({ account, files });
-  return {};
 };
 
 const items = [
@@ -41,19 +34,39 @@ const items = [
   </Anchor>
 ));
 
-const onHandleChange = (acceptedFiles) => {
-  if (!acceptedFiles) return;
-  const files = acceptedFiles.map((el) => el.name);
-  console.log(files);
-  fetch("/storage?index", {
-    method: "POST",
-    body: JSON.stringify({ files }),
-  });
-};
-
 export default function StoragePage() {
   const data = useLoaderData();
   const form = useRef();
+
+  const onHandleChange = async (acceptedFiles) => {
+    if (!acceptedFiles) return;
+    const files = acceptedFiles.map((el) => el.name);
+    const resp = await fetch("/storage/handler", {
+      method: "POST",
+      body: JSON.stringify({ files }),
+    });
+    const data = await resp.json();
+    console.log(data);
+    data.links.forEach((amz, index) => {
+      let form = new FormData();
+      Object.entries(amz.fields).forEach(([field, value]) => {
+        form.append(field, value);
+      });
+      form.append("file", acceptedFiles[index]);
+      Axios.post(amz.url, form)
+        .then(console.log)
+        .catch((err) => {
+          console.error(err);
+          showNotification({
+            color: "danger",
+            icon: <IconError404 />,
+            title: "Error uploading file",
+            message: `Failed to upload ${acceptedFiles[index].name}`,
+          });
+        });
+    });
+  };
+
   return (
     <DashLayout>
       <StatsRingCard title="Storage Stats" />

@@ -41,21 +41,27 @@ export default function FooterSocial() {
       <Container className={classes.inner}>
         <small>
           Made with ❤️ by{" "}
-          <a
-            style={{ color: "whitesmoke" }}
-            href="https://iresharma.vercel.app"
-          >
+          <a style={{ color: "purple" }} href="https://iresharma.vercel.app">
             Iresharma
           </a>
         </small>
         <Group spacing={0} className={classes.links} position="right" noWrap>
-          <ActionIcon size="lg">
+          <ActionIcon
+            sx={(theme) => ({ color: theme.colors.brand[9] })}
+            size="lg"
+          >
             <IconBrandTwitter size={18} stroke={1.5} />
           </ActionIcon>
-          <ActionIcon size="lg">
+          <ActionIcon
+            sx={(theme) => ({ color: theme.colors.brand[9] })}
+            size="lg"
+          >
             <IconBrandYoutube size={18} stroke={1.5} />
           </ActionIcon>
-          <ActionIcon size="lg">
+          <ActionIcon
+            sx={(theme) => ({ color: theme.colors.brand[9] })}
+            size="lg"
+          >
             <IconBrandInstagram size={18} stroke={1.5} />
           </ActionIcon>
         </Group>

@@ -28,6 +28,7 @@
     "@remix-run/serve": "^1.6.7",
     "@tabler/icons": "^1.78.1",
     "aws-sdk": "^2.1197.0",
+    "axios": "^0.27.2",
     "bcrypt": "^5.0.1",
     "bson": "^4.6.5",
     "chroma-js": "^2.4.2",

@@ -11,8 +11,8 @@ const useStyles = createStyles((theme) => ({
   card: {
     backgroundColor:
       theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
-      border: `1px solid ${theme.colors.brand[9]}`,
-      borderRadius: theme.radius.xl
+    border: `1px solid ${theme.colors.brand[9]}`,
+    borderRadius: theme.radius.xs,
   },
 
   label: {
@@ -112,7 +112,7 @@ export default function StatsRingCard() {
   ));
 
   return (
-    <Card withBorder p="xl" radius="md" className={classes.card}>
+    <Card shadow="xl" withBorder p="xl" radius="md" className={classes.card}>
       <div className={classes.inner}>
         <div>
           <Text size="xl" className={classes.label}>

@@ -24,8 +24,10 @@ const StorageRef = (function () {
       return bucket;
     },
     uploadFile: async ({ account, files }) => {
-      const bucketName = `customer-${account.account_name.toLowerCase().replace('@', '-')}`;
-      const promises = files.map((file) => s3.putPresignedURL(bucketName, file))
+      const bucketName = `customer-${account.id.toLowerCase().replace('@', '-')}`;
+      const promises = files.map((file) => s3.putPresignedURL(bucketName, file));
+      const responses = await Promise.all(promises);
+      return responses;
     },
   };
 })();

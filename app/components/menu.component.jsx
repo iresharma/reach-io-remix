@@ -16,6 +16,7 @@ const sx = (theme) => ({
   "&[data-active]": {
     border: `1px solid ${theme.colors.brand[9]}`,
     color: `${theme.colors.brand[9]} !important`,
+    backgroundColor: theme.white,
   },
   "&:hover": {
     backgroundColor: theme.colors.brand[9],

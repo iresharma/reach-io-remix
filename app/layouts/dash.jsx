@@ -71,8 +71,8 @@ export default function Home({ children }) {
           hidden={!opened}
           width={{ sm: 200, lg: 300 }}
           sx={(theme) => ({
-            background: theme.colors.brand[4],
-            borderColor: theme.colors.brand[9],
+            background: theme.colors.brand[1],
+            borderColor: theme.colors.brand[1],
           })}
         >
           <NavMenu />
@@ -83,8 +83,8 @@ export default function Home({ children }) {
           height={70}
           p="md"
           sx={(theme) => ({
-            background: theme.colors.brand[4],
-            borderColor: theme.colors.brand[9],
+            background: theme.colors.brand[1],
+            borderColor: theme.colors.brand[1],
           })}
         >
           <div
@@ -123,13 +123,13 @@ export default function Home({ children }) {
                 >
                   <TextInput
                     sx={(theme) => ({
-                      backgroundColor: theme.colors.brand[2],
+                      backgroundColor: theme.colors.white,
                       borderRadius: theme.radius.md,
                       ".mantine-Input-wrapper": {
                         width: "30ch",
                       },
                       "input[type=text]": {
-                        backgroundColor: theme.colors.brand[2],
+                        backgroundColor: theme.colors.white,
                       },
                       ".mantine-TextInput-rightSection": {
                         width: "7ch",
@@ -248,7 +248,7 @@ export default function Home({ children }) {
       footer={<Footer />}
     >
       <Box
-        sx={(theme) => ({ backgroundColor: theme.colors.brand[1], margin: 0, padding: theme.spacing.sm })}
+        sx={(theme) => ({ padding: theme.spacing.sm })}
         style={{ overflow: "scroll" }}
       >
         {children}

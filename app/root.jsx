@@ -8,7 +8,7 @@ import {
   useCatch,
 } from "@remix-run/react";
 import { MantineProvider, ColorSchemeProvider } from "@mantine/core";
-import { NotificationsProvider } from '@mantine/notifications';
+import { NotificationsProvider } from "@mantine/notifications";
 import { StylesPlaceholder } from "@mantine/remix";
 import { getSession } from "./session";
 import { redirect } from "@remix-run/node";
@@ -113,16 +113,16 @@ export default function App() {
         colorScheme: "light",
         colors: {
           brand: [
-            "#ecfdf5",
-            "#d1fae5",
-            "#a7f3d0",
-            "#6ee7b7",
-            "#34d399",
-            "#10b981",
-            "#059669",
-            "#047857",
-            "#065f46",
-            "#064e3b",
+            "#eff6ff",
+            "#dbeafe",
+            "#bfdbfe",
+            "#93c5fd",
+            "#60a5fa",
+            "#3b82f6",
+            "#2563eb",
+            "#1d4ed8",
+            "#1e40af",
+            "#1e3a8a",
           ],
         },
         primaryColor: "brand",
