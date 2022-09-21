@@ -4,6 +4,7 @@ import { redirect } from "@remix-run/node";
 import { getKanbanData } from "../../database/board.database.server";
 import { useLoaderData } from "@remix-run/react";
 // import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import DragList from "../../components/board/dragList.component";
 
 // https://codesandbox.io/s/small-hooks-3jy33t?file=/src/ListItem.js:0-49
 
@@ -21,8 +22,9 @@ export default function Board() {
   const loader = useLoaderData();
   return (
     <Dash>
-      <h1>hi</h1>
+      <h1>Kanban Board</h1>
       <pre>{JSON.stringify(loader, null, 4)}</pre>
+      <DragList />
     </Dash>
   );
 }
