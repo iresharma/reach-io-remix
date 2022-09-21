@@ -10,7 +10,7 @@ export const createBucket = (id) => {
         console.log(data);
         prisma.userAccount
           .update({ where: { id: id }, data: { bucketId: data.id } })
-          .then((user) => resolve({ ...data, ...user }))
+          .then(resolve)
           .catch(reject);
       })
       .catch(reject);

@@ -9,6 +9,7 @@ import {
   IconFlame,
   IconCalendar,
   IconBrandShopee,
+  IconLayoutKanban
 } from "@tabler/icons";
 import { useLocation } from "@remix-run/react";
 
@@ -43,6 +44,14 @@ export default function Menu() {
         label="Home"
         icon={<IconHome2 size={16} stroke={1.5} />}
         active={location.every((val) => val === "")}
+      />
+      <NavLink
+        sx={sx}
+        component="a"
+        href="/board"
+        label="Board"
+        icon={<IconLayoutKanban size={16} stroke={1.5} />}
+        active={location.includes("board")}
       />
       <NavLink
         sx={sx}

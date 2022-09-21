@@ -18,9 +18,11 @@ model UserAccount {
   user         User[]
   owner        String   @db.ObjectId
   page         page?
-  bucket       bucket?   @relation(fields: [bucketId], references: [id])
+  bucket       bucket?  @relation(fields: [bucketId], references: [id])
   links        Json?
-  bucketId     String?   @unique @db.ObjectId
+  bucketId     String?  @unique @db.ObjectId
+  board        board?   @relation(fields: [boardId], references: [id])
+  boardId      String?  @unique @db.ObjectId
 }
 
 model User {
@@ -54,6 +56,14 @@ model page {
 model bucket {
   id            String       @id @default(auto()) @map("_id") @db.ObjectId
   files         Json[]
+  userAccountId String       @unique @db.ObjectId
+  UserAccount   UserAccount?
+}
+
+model board {
+  id            String       @id @default(auto()) @map("_id") @db.ObjectId
+  boards        Json[]
+  items         Json[]
   userAccountId String       @unique @db.ObjectId
   UserAccount   UserAccount?
 }
