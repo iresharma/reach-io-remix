@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useEffect } from "react";
 import { DragDropContext, resetServerContext } from "react-beautiful-dnd";
 import DraggableElement from "./draggableElement.component";
@@ -43,6 +44,12 @@ function DragList({ items }) {
       result.destination.index,
       removedElement
     );
+
+    console.log(result);
+    axios.patch("/board/handler", {
+      id: result.draggableId,
+      prefix: result.destination.droppableId,
+    });
 
     setElements(listCopy);
   };

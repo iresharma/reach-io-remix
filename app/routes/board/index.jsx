@@ -5,7 +5,7 @@ import { getKanbanData, addItem } from "../../database/board.database.server";
 import { useLoaderData } from "@remix-run/react";
 // import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import DragList from "../../components/board/dragList.component";
-import { ObjectId } from "bson";
+// import { ObjectId } from "bson";
 import { useMemo } from "react";
 
 // https://codesandbox.io/s/small-hooks-3jy33t?file=/src/ListItem.js:0-49
@@ -26,10 +26,10 @@ export const action = async ({ request }) => {
   const kanBan = account.boardId;
   const formData = Object.fromEntries(await request.formData());
   console.log(formData);
+  formData["boardId"] = kanBan;
   formData["prefix"] = "todo";
-  formData["id"] = new ObjectId();
-  formData["created_at"] = Date.now();
-  await addItem(kanBan, formData);
+  formData["created_at"] = Date.now().toString();
+  await addItem(formData);
   return {};
 };
 
@@ -38,7 +38,7 @@ export default function Board() {
   let elements = useMemo(() => {
     const todo = loader.kanban.items.filter((item) => item.prefix === "todo");
     const progress = loader.kanban.items.filter(
-      (item) => item.prefix === "progerss"
+      (item) => item.prefix === "progress"
     );
     const done = loader.kanban.items.filter((item) => item.prefix === "done");
     return {

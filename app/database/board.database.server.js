@@ -19,17 +19,18 @@ export const initializeKanban = (id) => {
 
 export const getKanbanData = (id) => {
     return new Promise((resolve, reject) => {
-        prisma.board.findUnique({ where: { id: id } }).then(resolve).catch(reject);
+        prisma.board.findUnique({ where: { id: id }, include: { items: true } }).then(resolve).catch(reject);
     });
 }
-export const addItem = (id, data) => {
+export const addItem = (data) => {
     return new Promise((resolve, reject) => {
-        prisma.board.update({
-            where: { id: id }, data: {
-                items: {
-                    push: data
-                }
-            }
-        }).then(resolve).catch(reject);
+        prisma.item.create({
+            data: data,
+        }).then(resolve).catch(reject)
     });
+}
+export const updatePrefix = (id, prefix) => {
+    return new Promise((resolve, reject) => {
+        prisma.item.update({ where: { id: id }, data: { prefix: prefix } }).then(resolve).catch(reject);
+    })
 }

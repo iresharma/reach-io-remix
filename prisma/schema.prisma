@@ -4,6 +4,10 @@ datasource db {
   referentialIntegrity = "prisma"
 }
 
+generator dbml {
+  provider = "prisma-dbml-generator"
+}
+
 generator client {
   provider        = "prisma-client-js"
   previewFeatures = ["referentialIntegrity"]
@@ -62,8 +66,21 @@ model bucket {
 
 model board {
   id            String       @id @default(auto()) @map("_id") @db.ObjectId
-  boards        Json[]
-  items         Json[]
+  items         item[]
   userAccountId String       @unique @db.ObjectId
   UserAccount   UserAccount?
+}
+
+model item {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  description String
+  priority    String
+  script      String
+  reference   String
+  storage     String
+  prefix      String
+  created_at  String
+  board       board?  @relation(fields: [boardId], references: [id])
+  boardId     String? @db.ObjectId
 }
