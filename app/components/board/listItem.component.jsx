@@ -1,6 +1,7 @@
 import { Draggable } from "react-beautiful-dnd";
-import { Box, Badge, Avatar } from "@mantine/core";
+import { Box, Badge, Avatar, ActionIcon, Tooltip } from "@mantine/core";
 import { timeSince } from "../../services/utils";
+import { IconFile, IconFolderX, IconLink } from "@tabler/icons";
 
 const ListItem = ({ item, index }) => {
   return (
@@ -38,7 +39,7 @@ const ListItem = ({ item, index }) => {
             >
               <h3 style={{ margin: 0 }}>{item.title}</h3>
               <h6 style={{ margin: 0, fontWeight: "normal" }}>
-                {timeSince(new Date(Date.now()) - new Date(item["created_at"]))}
+                {timeSince(Date.now(), item["created_at"])}
               </h6>
             </div>
             <h6 style={{ margin: 0, fontWeight: "normal" }}>
@@ -51,9 +52,32 @@ const ListItem = ({ item, index }) => {
                 marginTop: "1em",
               }}
             >
-              <Badge color="green" size="sm" variant="filled">
-                Light
-              </Badge>
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <Badge color="green" size="sm" variant="filled">
+                  Light
+                </Badge>
+                {item.script !== "" && (
+                  <Tooltip label="link to script">
+                    <ActionIcon color="primary">
+                      <IconFile size={20} />
+                    </ActionIcon>
+                  </Tooltip>
+                )}
+                {item.storage !== "" && (
+                  <Tooltip label="link to media in storage">
+                    <ActionIcon color="primary">
+                      <IconFolderX size={20} />
+                    </ActionIcon>
+                  </Tooltip>
+                )}
+                {item.reference !== "" && (
+                  <Tooltip label="link to reference">
+                    <ActionIcon color="primary">
+                      <IconLink size={20} />
+                    </ActionIcon>
+                  </Tooltip>
+                )}
+              </div>
 
               <Badge
                 sx={{ paddingLeft: 0 }}

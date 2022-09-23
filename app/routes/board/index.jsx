@@ -28,7 +28,7 @@ export const action = async ({ request }) => {
   console.log(formData);
   formData["prefix"] = "todo";
   formData["id"] = new ObjectId();
-  formData["created_at"] = new Date().getUTCSeconds();
+  formData["created_at"] = Date.now();
   await addItem(kanBan, formData);
   return {};
 };
