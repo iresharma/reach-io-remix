@@ -1,17 +1,6 @@
 import React, { useEffect } from "react";
-import { DragDropContext } from "react-beautiful-dnd";
+import { DragDropContext, resetServerContext } from "react-beautiful-dnd";
 import DraggableElement from "./draggableElement.component";
-
-// fake data generator
-const getItems = (count, prefix) =>
-  Array.from({ length: count }, (v, k) => k).map((k) => {
-    const randomId = Math.floor(Math.random() * 1000);
-    return {
-      id: `item-${randomId}`,
-      prefix,
-      content: `item ${randomId}`,
-    };
-  });
 
 const removeFromList = (list, index) => {
   const result = Array.from(list);
@@ -25,20 +14,16 @@ const addToList = (list, index, element) => {
   return result;
 };
 
-const lists = ["todo", "inProgress", "done"];
+const lists = ["todo", "progress", "done"];
 
-const generateLists = () =>
-  lists.reduce(
-    (acc, listKey) => ({ ...acc, [listKey]: getItems(10, listKey) }),
-    {}
-  );
-
-function DragList() {
-  const [elements, setElements] = React.useState(generateLists());
+function DragList({ items }) {
+  const [elements, setElements] = React.useState(items);
 
   useEffect(() => {
-    setElements(generateLists());
+    setElements(items);
+    console.log(elements);
   }, []);
+  resetServerContext();
 
   const onDragEnd = (result) => {
     if (!result.destination) {

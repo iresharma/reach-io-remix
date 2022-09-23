@@ -1,6 +1,6 @@
 import { Draggable } from "react-beautiful-dnd";
 import { Box, Badge, Avatar } from "@mantine/core";
-import { timeSince } from "../../services/utils"
+import { timeSince } from "../../services/utils";
 
 const ListItem = ({ item, index }) => {
   return (
@@ -36,15 +36,13 @@ const ListItem = ({ item, index }) => {
                 justifyContent: "space-between",
               }}
             >
-              <h3 style={{ margin: 0 }}>Title</h3>
+              <h3 style={{ margin: 0 }}>{item.title}</h3>
               <h6 style={{ margin: 0, fontWeight: "normal" }}>
-                {timeSince(new Date(Date.now()) - 24*60*60*1000)}
+                {timeSince(new Date(Date.now()) - new Date(item["created_at"]))}
               </h6>
             </div>
             <h6 style={{ margin: 0, fontWeight: "normal" }}>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis
-              dolorum quam, earum a commodi suscipit error fugiat recusandae ab.
-              A impedit architecto provident?
+              {item.description}
             </h6>
             <div
               style={{

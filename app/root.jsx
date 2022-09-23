@@ -14,6 +14,16 @@ import { getSession } from "./session";
 import { redirect } from "@remix-run/node";
 import GlobalProgress from "./components/globalProgress.component";
 import { SpotlightProvider } from "@mantine/spotlight";
+import {
+  IconHome,
+  IconDashboard,
+  IconFileText,
+  IconSearch,
+  IconLayoutKanban,
+  IconFile3d,
+  IconFolders,
+  IconBrandEdge,
+} from "@tabler/icons";
 
 import styles from "~/styles/components/logo.css";
 
@@ -89,22 +99,22 @@ export const CatchBoundary = () => {
   );
 };
 
-export const ErrorBoundary = ({ error }) => {
-  return (
-    <MantineProvider
-      theme={{
-        colorScheme: "light",
-      }}
-      withGlobalStyles
-      withNormalizeCSS
-    >
-      <ColorSchemeProvider>
-        <StylesPlaceholder />
-      </ColorSchemeProvider>
-      {retComponent(error)}
-    </MantineProvider>
-  );
-};
+// export const ErrorBoundary = ({ error }) => {
+//   return (
+//     <MantineProvider
+//       theme={{
+//         colorScheme: "light",
+//       }}
+//       withGlobalStyles
+//       withNormalizeCSS
+//     >
+//       <ColorSchemeProvider>
+//         <StylesPlaceholder />
+//       </ColorSchemeProvider>
+//       {retComponent(error)}
+//     </MantineProvider>
+//   );
+// };
 
 export default function App() {
   return (
@@ -135,7 +145,8 @@ export default function App() {
         <NotificationsProvider>
           <SpotlightProvider
             shortcut={["mod + P", "mod + K", "/"]}
-            actions={[]}
+            actions={actions}
+            searchIcon={<IconSearch />}
           >
             <html lang="en">
               <head>
@@ -157,3 +168,30 @@ export default function App() {
     </MantineProvider>
   );
 }
+
+const actions = [
+  {
+    title: "Home",
+    description: "Get to home page",
+    onTrigger: () => (window.location.pathname = "/"),
+    icon: <IconHome size={18} />,
+  },
+  {
+    title: "Board",
+    description: "Access to your kanban board.",
+    onTrigger: () => (window.location.pathname = "/board"),
+    icon: <IconLayoutKanban size={18} />,
+  },
+  {
+    title: "Storage",
+    description: "Your remote storage",
+    onTrigger: () => (window.location.pathname = "/storage"),
+    icon: <IconFolders size={18} />,
+  },
+  {
+    title: "Page",
+    description: "Manage your starter page",
+    onTrigger: () => console.log("Documentation"),
+    icon: <IconBrandEdge size={18} />,
+  },
+];

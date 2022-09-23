@@ -22,3 +22,14 @@ export const getKanbanData = (id) => {
         prisma.board.findUnique({ where: { id: id } }).then(resolve).catch(reject);
     });
 }
+export const addItem = (id, data) => {
+    return new Promise((resolve, reject) => {
+        prisma.board.update({
+            where: { id: id }, data: {
+                items: {
+                    push: data
+                }
+            }
+        }).then(resolve).catch(reject);
+    });
+}

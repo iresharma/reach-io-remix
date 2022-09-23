@@ -1,6 +1,12 @@
 
+import { redirect } from "@remix-run/node";
 import StorageRef from "../../services/storage/index.server";
 import { getSession } from "../../session";
+
+export const loader = () => {
+    return redirect('/storage')
+}
+
 export const action = async ({ request }) => {
     switch (request.method) {
         case "POST":
