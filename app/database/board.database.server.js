@@ -4,8 +4,7 @@ export const initializeKanban = (id) => {
     return new Promise((resolve, reject) => {
         prisma.board.create({
             data: {
-                boards: [],
-                items: [],
+                // items: [],
                 userAccountId: id,
             }
         }).then(data => {

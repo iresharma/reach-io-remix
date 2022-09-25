@@ -1,12 +1,24 @@
 import DashLayout from "../layouts/dash";
 import { useLoaderData } from "@remix-run/react";
-import { getSession } from "../session";
+import { getSession, commitSession } from "../session";
+import { getUserAccountById } from "../database/auth.database.server";
 import SocialStats from "../components/home/social-stats.component";
+import { json } from "@remix-run/node";
 
 export const loader = async ({ request }) => {
   const session = await getSession(request.headers.get("Cookie"));
-  const userData = session.get("account");
-  return { userData };
+  let userData = session.get("account");
+  const userAccountId = userData.id;
+  userData = await getUserAccountById(userAccountId);
+  session.set("account", userData);
+  return json(
+    { userData },
+    {
+      headers: {
+        "Set-Cookie": await commitSession(session),
+      },
+    }
+  );
 };
 
 export default function HomePage() {

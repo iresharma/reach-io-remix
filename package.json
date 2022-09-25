@@ -11,8 +11,6 @@
   "dependencies": {
     "@emotion/react": "^11.10.0",
     "@emotion/server": "^11.10.0",
-    "@fullcalendar/daygrid": "^5.11.2",
-    "@fullcalendar/react": "^5.11.2",
     "@mantine/core": "^5.0.3",
     "@mantine/dates": "^5.0.3",
     "@mantine/dropzone": "^5.0.3",

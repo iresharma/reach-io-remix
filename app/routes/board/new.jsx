@@ -84,12 +84,12 @@ const useStyles = createStyles((theme) => ({
 export const action = async ({ request }) => {
   const session = await getSession(request.headers.get("Cookie"));
   let userData = session.get("account");
-  session.set("account", userData);
   const data = await initializeKanban(userData.id);
+  session.set("account", data);
   console.log(data);
   return redirect("/board", {
     headers: {
-      "Set-Cookie": await commitSession(userData),
+      "Set-Cookie": await commitSession(session),
     },
   });
 };

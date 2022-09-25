@@ -1,8 +1,4 @@
-import {
-  redirect,
-  unstable_parseMultipartFormData,
-  unstable_createFileUploadHandler,
-} from "@remix-run/node";
+import { redirect } from "@remix-run/node";
 import { getSession } from "../../session";
 import DashLayout from "../../layouts/dash";
 import { useState, useRef } from "react";
@@ -17,6 +13,7 @@ import Axios from "axios";
 
 export const loader = async ({ request }) => {
   const session = await getSession(request.headers.get("Cookie"));
+  console.log(session.get("account"));
   const account = session.get("account");
   if (!account.bucketId && request.url.split("/").pop() !== "new") {
     return redirect("/storage/new");
@@ -71,6 +68,7 @@ export default function StoragePage() {
   return (
     <DashLayout>
       <StatsRingCard title="Storage Stats" />
+      <pre>{JSON.stringify(data, null, 4)}</pre>
 
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <Breadcrumbs style={{ margin: "15px" }}>{items}</Breadcrumbs>

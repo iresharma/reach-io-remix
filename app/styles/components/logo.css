@@ -5,3 +5,8 @@
   font-family: "Oleo Script Swash Caps", cursive;
   letter-spacing: 0.05em;
 }
+
+*::selection {
+  background-color: hsl(230deg, 57%, 53%);
+  color: white;
+}

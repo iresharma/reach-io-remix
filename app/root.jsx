@@ -12,15 +12,11 @@ import { NotificationsProvider } from "@mantine/notifications";
 import { StylesPlaceholder } from "@mantine/remix";
 import { getSession } from "./session";
 import { redirect } from "@remix-run/node";
-import GlobalProgress from "./components/globalProgress.component";
 import { SpotlightProvider } from "@mantine/spotlight";
 import {
   IconHome,
-  IconDashboard,
-  IconFileText,
   IconSearch,
   IconLayoutKanban,
-  IconFile3d,
   IconFolders,
   IconBrandEdge,
 } from "@tabler/icons";
@@ -99,22 +95,22 @@ export const CatchBoundary = () => {
   );
 };
 
-// export const ErrorBoundary = ({ error }) => {
-//   return (
-//     <MantineProvider
-//       theme={{
-//         colorScheme: "light",
-//       }}
-//       withGlobalStyles
-//       withNormalizeCSS
-//     >
-//       <ColorSchemeProvider>
-//         <StylesPlaceholder />
-//       </ColorSchemeProvider>
-//       {retComponent(error)}
-//     </MantineProvider>
-//   );
-// };
+export const ErrorBoundary = ({ error }) => {
+  return (
+    <MantineProvider
+      theme={{
+        colorScheme: "light",
+      }}
+      withGlobalStyles
+      withNormalizeCSS
+    >
+      <ColorSchemeProvider>
+        <StylesPlaceholder />
+      </ColorSchemeProvider>
+      {retComponent(error)}
+    </MantineProvider>
+  );
+};
 
 export default function App() {
   return (
@@ -157,7 +153,6 @@ export default function App() {
               <body>
                 <Outlet />
                 <ScrollRestoration />
-                <GlobalProgress />
                 <Scripts />
                 <LiveReload />
               </body>
