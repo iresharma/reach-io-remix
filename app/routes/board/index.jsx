@@ -6,7 +6,7 @@ import { useLoaderData } from "@remix-run/react";
 // import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import DragList from "../../components/board/dragList.component";
 // import { ObjectId } from "bson";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 
 // https://codesandbox.io/s/small-hooks-3jy33t?file=/src/ListItem.js:0-49
 
@@ -35,22 +35,22 @@ export const action = async ({ request }) => {
 
 export default function Board() {
   const loader = useLoaderData();
-  let elements = useMemo(() => {
+  const [elements, setElement] = useState({});
+  useMemo(() => {
     const todo = loader.kanban.items.filter((item) => item.prefix === "todo");
     const progress = loader.kanban.items.filter(
       (item) => item.prefix === "progress"
     );
     const done = loader.kanban.items.filter((item) => item.prefix === "done");
-    return {
+    setElement({
       todo: todo,
       progress: progress,
       done: done,
-    };
-  }, []);
+    });
+  }, [loader]);
   return (
     <Dash>
       <h1>Kanban Board</h1>
-      <pre>{JSON.stringify(elements, null, 4)}</pre>
       <DragList items={elements} />
     </Dash>
   );

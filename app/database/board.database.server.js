@@ -34,3 +34,8 @@ export const updatePrefix = (id, prefix) => {
         prisma.item.update({ where: { id: id }, data: { prefix: prefix } }).then(resolve).catch(reject);
     })
 }
+export const updateItem = (data) => {
+    return new Promise((resolve, reject) => {
+        prisma.item.update({ where: { id: data.id }, data: data }).then(resolve).catch(reject);
+    })
+}

@@ -22,8 +22,7 @@ function DragList({ items }) {
 
   useEffect(() => {
     setElements(items);
-    console.log(elements);
-  }, []);
+  }, [items]);
   resetServerContext();
 
   const onDragEnd = (result) => {
@@ -44,8 +43,6 @@ function DragList({ items }) {
       result.destination.index,
       removedElement
     );
-
-    console.log(result);
     axios.patch("/board/handler", {
       id: result.draggableId,
       prefix: result.destination.droppableId,
