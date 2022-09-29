@@ -4,6 +4,7 @@ import { getSession, commitSession } from "../session";
 import { getUserAccountById } from "../database/auth.database.server";
 import SocialStats from "../components/home/social-stats.component";
 import { json } from "@remix-run/node";
+import { Blockquote } from "@mantine/core";
 
 export const loader = async ({ request }) => {
   const session = await getSession(request.headers.get("Cookie"));
@@ -26,6 +27,27 @@ export default function HomePage() {
   return (
     <DashLayout>
       <h1>Team: {data.userData.account_name}</h1>
+      <Blockquote cite="– Reach team">
+        Welcome to the reach ecosystem, all your workflow needs to{" "}
+        <strong
+          style={{
+            background: `linear-gradient(
+    45deg,
+    hsl(230, 92%, 85%) 0%,
+    hsl(230, 57%, 53%) 25%,
+    hsl(230, 92%, 85%) 50%,
+    hsl(230, 69%, 61%) 75%,
+    #bc1888 100%
+  )`,
+            "-webkit-background-clip": "text",
+            "-webkit-text-fill-color": "transparent",
+            "font-family": `"Oleo Script Swash Caps", cursive`,
+          }}
+        >
+          Reach
+        </strong>{" "}
+        new heights is here.
+      </Blockquote>
       <SocialStats
         data={[
           {

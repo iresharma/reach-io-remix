@@ -120,70 +120,30 @@ export default function NewStoragePage() {
   }, [action]);
 
   return (
-    <DashLayout>
-      <Container className={classes.wrapper} size={1400}>
-        <div className={classes.inner}>
-          <Title className={classes.title}>
-            Fully managed, secure and{" "}
-            <Text component="span" className={classes.highlight} inherit>
-              Unlimited
-            </Text>{" "}
-            cloud storage for your use.
-          </Title>
+    <Container className={classes.wrapper} size={1400}>
+      <div className={classes.inner}>
+        <Title className={classes.title}>
+          Everything you are.{" "}
+          <Text component="span" className={classes.highlight} inherit>
+            In one simple link.
+          </Text>
+        </Title>
 
-          <Container p={0} size={600}>
-            <Text size="lg" color="dimmed" className={classes.description}>
-              No more worry about storage, no more multi hard drive setup. Now
-              you get your whole fully managed cloud storage sever.
-            </Text>
-          </Container>
+        <Container p={0} size={600}>
+          <Text size="lg" color="dimmed" className={classes.description}>
+            share everything you create, curate and sell online. All from the
+            one link in bio.
+          </Text>
+        </Container>
 
-          <div className={classes.controls}>
-            <Form method="post" action="/storage/import">
-              <Button
-                className={classes.control}
-                size="lg"
-                variant="default"
-                color="gray"
-              >
-                Import from &nbsp;&nbsp;
-                <img
-                  style={{
-                    width: "25px",
-                    height: "25px",
-                    margin: "5px",
-                  }}
-                  src={DriveIcon}
-                  alt="google-drive"
-                />
-                <img
-                  style={{
-                    width: "25px",
-                    height: "25px",
-                    margin: "5px",
-                  }}
-                  src={DropBoxIcon}
-                  alt="DropBox"
-                />
-                <img
-                  style={{
-                    width: "25px",
-                    height: "25px",
-                    margin: "5px",
-                  }}
-                  src={OnDriveIcon}
-                  alt="Onedrive"
-                />
-              </Button>
-            </Form>
-            <Form method="post">
-              <Button type="submit" className={classes.control} size="lg">
-                Start new
-              </Button>
-            </Form>
-          </div>
+        <div className={classes.controls}>
+          <Form method="post">
+            <Button type="submit" className={classes.control} size="lg">
+              Start new
+            </Button>
+          </Form>
         </div>
-      </Container>
-    </DashLayout>
+      </div>
+    </Container>
   );
 }
