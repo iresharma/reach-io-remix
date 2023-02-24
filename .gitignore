@@ -5,3 +5,4 @@ node_modules
 /public/build
 .env
 aws_creds.csv
+gcp-service-account-key.json

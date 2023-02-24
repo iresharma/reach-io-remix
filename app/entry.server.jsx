@@ -14,6 +14,7 @@ export default function handleRequest(
 ) {
   let markup = renderToString(<RemixServer context={remixContext} url={request.url} />);
   responseHeaders.set('Content-Type', 'text/html');
+  responseHeaders.set("X-Powered-By", "Malboro");
 
   return new Response(`<!DOCTYPE html>${injectStyles(markup, server)}`, {
     status: responseStatusCode,

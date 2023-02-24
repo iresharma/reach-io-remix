@@ -3,12 +3,12 @@ import { createStyles, Title, Text, Button, Container } from "@mantine/core";
 import DriveIcon from "../../assets/images/google-drive.png";
 import DropBoxIcon from "../../assets/images/dropbox.png";
 import OnDriveIcon from "../../assets/images/onedrive.png";
-import Storage from "../../services/storage/index.server";
 import { getSession, commitSession } from "../../session";
 import { Form, useActionData } from "@remix-run/react";
 import { redirect } from "@remix-run/node";
 import { showNotification } from "@mantine/notifications";
 import { useEffect } from "react";
+import {createNewStorageBucket } from "../../services/storage.server"
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -86,14 +86,8 @@ const useStyles = createStyles((theme) => ({
 export const action = async ({ request }) => {
   const session = await getSession(request.headers.get("Cookie"));
   let userData = session.get("account");
-  userData = await Storage.initializeStorage(userData);
-  console.log(userData);
-  if (!userData) {
-    return {
-      error: "Failed to create bucket",
-    };
-  }
-  session.set("account", userData);
+  userData = await createNewStorageBucket(userData);
+  session.set("account", userData)
   return redirect("/storage", {
     headers: {
       "Set-Cookie": await commitSession(session),
@@ -106,7 +100,6 @@ export default function NewStoragePage() {
   const action = useActionData();
 
   useEffect(() => {
-    console.error("hi hi hi hi hi hi hi hi hi hi hi hi");
     if (action) {
       const { error } = action;
       if (error) {

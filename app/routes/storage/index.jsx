@@ -4,7 +4,7 @@ import DashLayout from "../../layouts/dash";
 import { useState, useRef } from "react";
 import StatsRingCard from "../../components/storage/stats.component";
 import { Anchor, Breadcrumbs, Button } from "@mantine/core";
-import StorageRef from "../../services/storage/index.server";
+import { getStorageInfo } from "../../services/storage.server";
 import { Form, useLoaderData } from "@remix-run/react";
 import { IconFolderPlus, IconError404 } from "@tabler/icons";
 import DropZone from "../../components/storage/dropzone.component";
@@ -13,12 +13,11 @@ import Axios from "axios";
 
 export const loader = async ({ request }) => {
   const session = await getSession(request.headers.get("Cookie"));
-  console.log(session.get("account"));
   const account = session.get("account");
   if (!account.bucketId && request.url.split("/").pop() !== "new") {
     return redirect("/storage/new");
   }
-  return StorageRef.getStorageInfo(account);
+  return await getStorageInfo(account);
 };
 
 const items = [
@@ -36,22 +35,26 @@ export default function StoragePage() {
   const form = useRef();
 
   const onHandleChange = async (acceptedFiles) => {
-    if (!acceptedFiles) return;
+    if (!acceptedFiles || acceptedFiles.length == 0) return;
     const files = acceptedFiles.map((el) => el.name);
     const resp = await fetch("/storage/handler", {
       method: "POST",
       body: JSON.stringify({ files }),
     });
     const data = await resp.json();
-    console.log(data);
-    data.links.forEach((amz, index) => {
+    data.links.forEach((gcp, index) => {
       let form = new FormData();
-      Object.entries(amz.fields).forEach(([field, value]) => {
-        form.append(field, value);
-      });
       form.append("key", acceptedFiles[index].name);
       form.append("file", acceptedFiles[index]);
-      Axios.post(amz.url, form)
+      Axios.request({
+        method: "PUT",
+        url: gcp,
+        data: form,
+        headers: {
+          "Content-Type": "application/octet-stream",
+        },
+        onUploadProgress: (p) => {},
+      })
         .then(console.log)
         .catch((err) => {
           console.error(err);
@@ -76,6 +79,8 @@ export default function StoragePage() {
           {" "}
           <IconFolderPlus style={{ marginRight: "10px" }} /> Add Folder
         </Button>
+      </div>
+      <div>
       </div>
       <Form ref={form} method="post" encType="multipart/form-data">
         <DropZone onHandleChange={onHandleChange} />

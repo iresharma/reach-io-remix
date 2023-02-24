@@ -62,6 +62,7 @@ model bucket {
   files         Json[]
   userAccountId String       @unique @db.ObjectId
   UserAccount   UserAccount?
+  bucketRef     String
 }
 
 model board {

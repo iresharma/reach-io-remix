@@ -1,3 +1,4 @@
+import { redirect } from "@remix-run/node";
 import DashLayout from "../layouts/dash";
 import { useLoaderData } from "@remix-run/react";
 import { getSession, commitSession } from "../session";
@@ -9,6 +10,9 @@ import { Blockquote } from "@mantine/core";
 export const loader = async ({ request }) => {
   const session = await getSession(request.headers.get("Cookie"));
   let userData = session.get("account");
+  if (!userData) {
+    return redirect("/login");
+  }
   const userAccountId = userData.id;
   userData = await getUserAccountById(userAccountId);
   session.set("account", userData);

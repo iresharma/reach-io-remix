@@ -51,6 +51,7 @@ Table bucket {
   files Json[] [not null]
   userAccountId String [unique, not null]
   UserAccount UserAccount
+  bucketRef String [not null]
 }
 
 Table board {
