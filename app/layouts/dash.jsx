@@ -28,8 +28,10 @@ import Logo from "../components/logo.component";
 import NavMenu from "../components/menu.component";
 import Footer from "../components/footer.component";
 import { openSpotlight } from "@mantine/spotlight";
+import { getSession } from "../session";
 
 import { useState } from "react";
+import { useLoaderData } from "@remix-run/react";
 
 const useStyles = createStyles((theme) => ({
   user: {
@@ -52,12 +54,19 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
+export const loader = async ({ request }) => {
+  const session = await getSession(request.headers.get("Cookie"));
+  const account = session.get("account");
+  return account;
+}
+
 export default function Home({ children }) {
+  const userData = useLoaderData()
   const { classes, theme, cx } = useStyles();
   const [userMenuOpened, setUserMenuOpened] = useState(false);
   const [opened, setOpened] = useState(false);
   const user = {
-    name: "Iresh Sharma",
+    name: userData.account_name,
     image: "",
   };
   return (
@@ -179,7 +188,7 @@ export default function Home({ children }) {
                             sx={theme => ({ lineHeight: 1, color: theme.colors.brand[9] })}
                             mr={3}
                           >
-                            {user.name}
+                            {userData.userData.account_name}
                           </Text>
                           <IconChevronDown size={12} stroke={1.5} />
                         </Group>

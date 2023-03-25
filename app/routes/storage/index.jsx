@@ -1,7 +1,7 @@
 import { redirect } from "@remix-run/node";
 import { getSession } from "../../session";
 import DashLayout from "../../layouts/dash";
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import StatsRingCard from "../../components/storage/stats.component";
 import { Anchor, Breadcrumbs, Button } from "@mantine/core";
 import { getStorageInfo } from "../../services/storage.server";
