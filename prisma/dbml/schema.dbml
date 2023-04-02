@@ -10,9 +10,10 @@ Table UserAccount {
   photoUrl String
   user User [not null]
   owner String [not null]
-  page page
-  bucket bucket
   links Json
+  page page
+  pageId String [unique]
+  bucket bucket
   bucketId String [unique]
   board board
   boardId String [unique]
@@ -40,10 +41,9 @@ Table Auth {
 Table page {
   id String [pk]
   route String [unique, not null]
-  template String [not null]
-  links String [not null]
-  account UserAccount [not null]
+  template Json [not null]
   userAccountId String [unique, not null]
+  UserAccount UserAccount
 }
 
 Table bucket {
@@ -75,6 +75,8 @@ Table item {
   boardId String
 }
 
+Ref: UserAccount.pageId - page.id
+
 Ref: UserAccount.bucketId - bucket.id
 
 Ref: UserAccount.boardId - board.id
@@ -82,7 +84,5 @@ Ref: UserAccount.boardId - board.id
 Ref: User.userAccountId > UserAccount.id
 
 Ref: User.authId - Auth.id
-
-Ref: page.userAccountId - UserAccount.id
 
 Ref: item.boardId > board.id

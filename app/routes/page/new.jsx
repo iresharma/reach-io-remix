@@ -1,10 +1,10 @@
-import DashLayout from "../../layouts/dash";
 import { createStyles, Title, Text, Button, Container } from "@mantine/core";
 import { getSession, commitSession } from "../../session";
 import { Form, useActionData } from "@remix-run/react";
 import { redirect } from "@remix-run/node";
 import { showNotification } from "@mantine/notifications";
 import { useEffect } from "react";
+import { initializePage } from "~/database/page.database.server";
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -82,8 +82,9 @@ const useStyles = createStyles((theme) => ({
 export const action = async ({ request }) => {
   const session = await getSession(request.headers.get("Cookie"));
   let userData = session.get("account");
-  session.set("account", userData);
-  return redirect("/storage", {
+  const data = await initializePage(userData);
+  session.set("account", data);
+  return redirect("/page", {
     headers: {
       "Set-Cookie": await commitSession(session),
     },

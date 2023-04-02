@@ -1,5 +1,16 @@
 import { redirect } from "@remix-run/node";
+import { getPageData } from "~/database/page.database.server";
 import { getSession } from "../../session";
+import { PageToolbar } from "../../components/page/toolbar.component";
+import buttonStyles from "../../styles/components/page/buttons.css";
+import toolBarStyles from "../../styles/components/page/pageToolbar.css";
+
+export const links = () => {
+  return [
+    { rel: "stylesheet", href: buttonStyles },
+    { rel: "stylesheet", href: toolBarStyles },
+  ];
+};
 
 export const loader = async ({ request }) => {
   const session = await getSession(request.headers.get("Cookie"));
@@ -8,8 +19,13 @@ export const loader = async ({ request }) => {
   if (!account.pageId && request.url.split("/").pop() !== "new") {
     return redirect("/page/new");
   }
+  return await getPageData(account.pageId);
 };
 
 export default function PageIndexContent() {
-  return <h1>Hi</h1>;
+  return (
+    <div>
+      <PageToolbar />
+    </div>
+  );
 }

@@ -66,7 +66,7 @@ export default function Home({ children }) {
   const [userMenuOpened, setUserMenuOpened] = useState(false);
   const [opened, setOpened] = useState(false);
   const user = {
-    name: userData.account_name,
+    name: 'ireh',
     image: "",
   };
   return (
@@ -188,7 +188,8 @@ export default function Home({ children }) {
                             sx={theme => ({ lineHeight: 1, color: theme.colors.brand[9] })}
                             mr={3}
                           >
-                            {userData.userData.account_name}
+                            {/* {userData.userData.account_name} */}
+                            Iresh
                           </Text>
                           <IconChevronDown size={12} stroke={1.5} />
                         </Group>

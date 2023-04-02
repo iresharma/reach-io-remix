@@ -21,9 +21,10 @@ model UserAccount {
   photoUrl     String?
   user         User[]
   owner        String   @db.ObjectId
-  page         page?
-  bucket       bucket?  @relation(fields: [bucketId], references: [id])
   links        Json?
+  page         page?    @relation(fields: [pageId], references: [id])
+  pageId       String?  @unique @db.ObjectId
+  bucket       bucket?  @relation(fields: [bucketId], references: [id])
   bucketId     String?  @unique @db.ObjectId
   board        board?   @relation(fields: [boardId], references: [id])
   boardId      String?  @unique @db.ObjectId
@@ -51,10 +52,9 @@ model Auth {
 model page {
   id            String      @id @default(auto()) @map("_id") @db.ObjectId
   route         String      @unique
-  template      String
-  links         String
-  account       UserAccount @relation(fields: [userAccountId], references: [id])
-  userAccountId String      @unique @db.ObjectId
+  template      Json
+  userAccountId String       @unique @db.ObjectId
+  UserAccount   UserAccount?
 }
 
 model bucket {

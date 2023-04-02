@@ -86,7 +86,6 @@ export const action = async ({ request }) => {
   let userData = session.get("account");
   const data = await initializeKanban(userData.id);
   session.set("account", data);
-  console.log(data);
   return redirect("/board", {
     headers: {
       "Set-Cookie": await commitSession(session),
