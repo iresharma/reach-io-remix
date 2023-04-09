@@ -42,6 +42,7 @@ Table page {
   id String [pk]
   route String [unique, not null]
   template Json [not null]
+  links Json
   userAccountId String [unique, not null]
   UserAccount UserAccount
 }

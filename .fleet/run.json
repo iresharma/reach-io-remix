@@ -1,0 +1,17 @@
+{
+  "configurations": [
+    {
+      "name": "Dev",
+      "type": "command",
+      "environment": {
+        "npm_config_color": "always",
+        "MOCHA_COLORS": "1",
+        "FORCE_COLOR": "true",
+        "DEBUG_COLORS": "true",
+        "COLORTERM": "true",
+      },
+      "program": "$USER_HOME$/.nvm/versions/node/v16.20.0/bin/npm",
+      "args": ["run","dev"],
+    }
+  ]
+}

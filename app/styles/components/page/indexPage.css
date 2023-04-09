@@ -1,0 +1,29 @@
+main.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+main.grid .links {
+  height: 80vh;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none;
+}
+main.grid .links::-webkit-scrollbar {
+  display: none;
+  width: 0 !important;
+}
+main.grid .links h1 {
+  margin-bottom: 0;
+}
+main.grid .links small {
+  color: gray;
+}
+main.grid .links .links-list {
+  overflow-y: scroll;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none;
+  height: 60vh;
+}
+main.grid .links .links-list::-webkit-scrollbar {
+  display: none;
+  width: 0 !important;
+}

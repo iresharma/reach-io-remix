@@ -53,6 +53,7 @@ model page {
   id            String      @id @default(auto()) @map("_id") @db.ObjectId
   route         String      @unique
   template      Json
+  links         Json?
   userAccountId String       @unique @db.ObjectId
   UserAccount   UserAccount?
 }

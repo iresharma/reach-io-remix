@@ -1,8 +1,7 @@
 import { Button } from "@mantine/core";
-import { useState } from "react";
+import { IconExternalLink } from "@tabler/icons"
 
-export function PageToolbar() {
-  const [active, setActive] = useState(0);
+export function PageToolbar({ updateActive, active }) {
   return (
     <nav className="page-toolBar">
       <div className="left">
@@ -10,20 +9,15 @@ export function PageToolbar() {
           variant="subtle"
           size="sm"
           color={active === 0 ? "brand" : "gray"}
-        >
-          Preview
-        </Button>
-        <Button
-          variant="subtle"
-          size="sm"
-          color={active === 1 ? "brand" : "gray"}
+          onClick={() => updateActive(0)}
         >
           Links
         </Button>
         <Button
           variant="subtle"
           size="sm"
-          color={active === 2 ? "brand" : "gray"}
+          color={active === 1 ? "brand" : "gray"}
+          onClick={() => updateActive(1)}
         >
           Design
         </Button>
@@ -31,7 +25,7 @@ export function PageToolbar() {
 
       <div className="right">
         <Button variant="subtle" size="sm" color="gray">
-          Visit
+          Visit <IconExternalLink size={12} />
         </Button>
       </div>
     </nav>
