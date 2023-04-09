@@ -1,21 +1,41 @@
-import { Card, Text, Group } from '@mantine/core';
-import {IconChecks, IconPencil} from "@tabler/icons"
+import {Card, Group, TextInput, Text} from '@mantine/core';
+import {IconChecks, IconGripVertical, IconPencil} from "@tabler/icons"
 import {useState} from 'react'
 
 function LinkCard(props) {
     const [edit, setEdit] = useState(false)
     return (
         <Card shadow="sm" pt={0} radius="md" mt={10} withBorder>
-            <Group position="apart" mt="xs" mb="xs">
-                <Text weight={500}>{props.name}</Text>
-                {!edit && <IconPencil size="18" color="gray" onClick={() => setEdit(true)}/>}
-                {edit && <IconChecks size="18" color="gray" onClick={() => setEdit(false)}/>}
-            </Group>
+            <Group position="apart" mt="xs" mb="xs" align="center">
+                <div {...props.dragHandleProps}><IconGripVertical/></div>
+                <div style={{ width: "90%" }}>
+                    <Group position="apart" mt="xs" mb="xs">
+                        {!edit && <Text transform="capitalize" weight={500}>{props.name}</Text>}
+                        {edit && <TextInput
+                            description="This will be displayed on the button"
+                            variant="unstyled"
+                            radius="xs"
+                            size="xs"
+                            value={props.name}
+                        />}
+                        {!edit && <IconPencil size="18" color="gray" onClick={() => setEdit(true)}/>}
+                        {edit && <IconChecks size="18" color="gray" onClick={() => setEdit(false)}/>}
+                    </Group>
 
-            <Text size="sm" color="dimmed">
-                {props.link}
-            </Text>
+                    <Text size="sm" color="dimmed">
+                        {!edit && <Text transform="capitalize" weight={500}>{props.link}</Text>}
+                        {edit && <TextInput
+                            description="This is where the user is redirected to"
+                            variant="unstyled"
+                            radius="xs"
+                            size="xs"
+                            value={props.link}
+                        />}
+                    </Text>
+                </div>
+            </Group>
         </Card>
-        );
+    );
 }
+
 export default LinkCard;

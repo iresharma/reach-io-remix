@@ -1,6 +1,15 @@
 main.grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1.5fr;
+}
+main.grid .preview {
+  padding: 50px;
+}
+main.grid .preview iframe {
+  height: 70vh;
+  width: 35.75vh;
+  border-radius: 30px;
+  border: 8px solid gray;
 }
 main.grid .links {
   height: 80vh;

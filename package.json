@@ -39,7 +39,7 @@
     "react-dropzone": "^14.2.2"
   },
   "devDependencies": {
-    "@remix-run/dev": "^1.6.7",
+    "@remix-run/dev": "^1.15.0",
     "@remix-run/eslint-config": "^1.6.7",
     "concurrently": "^7.3.0",
     "eslint": "^8.20.0",

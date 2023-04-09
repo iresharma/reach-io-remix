@@ -72,6 +72,7 @@ export const loader = async ({ request }) => {
 };
 
 const retComponent = (caught) => {
+  console.log(caught)
   if (caught.status === 404) return <NotFoundPage error={caught} />;
   else if (caught.status === 503) return <ServerOverload error={caught} />;
   else return <OtherError error={caught} />;

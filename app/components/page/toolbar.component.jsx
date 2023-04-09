@@ -1,5 +1,5 @@
 import { Button } from "@mantine/core";
-import { IconExternalLink } from "@tabler/icons"
+import { IconExternalLink } from "@tabler/icons";
 
 export function PageToolbar({ updateActive, active }) {
   return (
@@ -20,6 +20,22 @@ export function PageToolbar({ updateActive, active }) {
           onClick={() => updateActive(1)}
         >
           Design
+        </Button>
+        <Button
+          variant="subtle"
+          size="sm"
+          color={active === 2 ? "brand" : "gray"}
+          onClick={() => updateActive(2)}
+        >
+          Analytics
+        </Button>
+        <Button
+          variant="subtle"
+          size="sm"
+          color={active === 3 ? "brand" : "gray"}
+          onClick={() => updateActive(3)}
+        >
+          Settings
         </Button>
       </div>
 
