@@ -2,7 +2,7 @@
   "private": true,
   "sideEffects": false,
   "scripts": {
-    "build": "remix build",
+    "build": "npx prisma generate && remix build",
     "dev": "npx prisma generate && concurrently \"npm:sass\" \"npm:remix-dev\"",
     "remix-dev": "remix dev",
     "start": "cross-env NODE_ENV=production node ./server.js",
