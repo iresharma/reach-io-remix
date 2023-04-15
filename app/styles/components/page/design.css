@@ -1,0 +1,79 @@
+.design-preview {
+  position: fixed;
+  padding: 50px;
+}
+.design-preview iframe {
+  height: 70vh;
+  width: 35.75vh;
+  border-radius: 30px;
+  border: 8px solid gray;
+}
+
+.design {
+  margin-left: 53vh;
+}
+.design .header-section, .design .buttons, .design .font {
+  padding: 0 2em;
+  margin-top: 2em;
+  border: 1px solid #c4c4c4;
+  border-radius: 20px;
+}
+.design .header-section h1, .design .buttons h1, .design .font h1 {
+  margin-bottom: 0;
+}
+.design .header-section small, .design .buttons small, .design .font small {
+  color: gray;
+}
+.design .buttons-list {
+  overflow-y: scroll;
+  height: 47vh;
+  width: calc(100vw - 300px - 70vh);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+  margin-bottom: 10px;
+}
+.design .buttons-list .button-wrapper {
+  width: 200px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 150px;
+  cursor: pointer;
+}
+.design .buttons-list .button-wrapper:hover {
+  border: 2px solid #3b82f6;
+  border-radius: 10px;
+}
+.design .buttons-list .button-wrapper button {
+  cursor: default;
+}
+.design .buttons-list .button-wrapper span > code {
+  text-align: center;
+}
+.design .header-section {
+  padding: 0 2em;
+  margin-top: 2em;
+  border: 1px solid #c4c4c4;
+  border-radius: 20px;
+}
+.design .header-section h1 {
+  margin-bottom: 0;
+}
+.design .header-section small {
+  color: gray;
+}
+.design .header-section .profile {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1em;
+}
+.design .header-section .profile .inputs {
+  width: 100%;
+}
+.design .header-section .icons-wrapper {
+  display: flex;
+  align-items: center;
+}

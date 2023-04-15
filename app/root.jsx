@@ -88,7 +88,7 @@ export const CatchBoundary = () => {
       withGlobalStyles
       withNormalizeCSS
     >
-      <ColorSchemeProvider>
+      <ColorSchemeProvider colorScheme="light">
         <StylesPlaceholder />
       </ColorSchemeProvider>
       {retComponent(caught)}
@@ -147,9 +147,9 @@ export default function App() {
           >
             <html lang="en">
               <head>
+                <StylesPlaceholder />
                 <Meta />
                 <Links />
-                <StylesPlaceholder />
               </head>
               <body>
                 <Outlet />

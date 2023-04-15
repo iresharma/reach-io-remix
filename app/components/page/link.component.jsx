@@ -1,9 +1,15 @@
 import {Card, Group, TextInput, Text} from '@mantine/core';
-import {IconChecks, IconGripVertical, IconPencil} from "@tabler/icons"
+import {IconChecks, IconGripVertical, IconPencil, IconTrash} from "@tabler/icons"
 import {useState} from 'react'
 
 function LinkCard(props) {
     const [edit, setEdit] = useState(false)
+    const [name, setName] = useState(undefined);
+    const [link, setLink] = useState(undefined);
+    const updateLink = () => {
+        setEdit(false);
+        props.onChange({name, link});
+    }
     return (
         <Card shadow="sm" pt={0} radius="md" mt={10} withBorder>
             <Group position="apart" mt="xs" mb="xs" align="center">
@@ -16,10 +22,12 @@ function LinkCard(props) {
                             variant="unstyled"
                             radius="xs"
                             size="xs"
-                            value={props.name}
+                            value={name === undefined ? props.name : name}
+                            onChange={e => setName(e.target.value)}
                         />}
                         {!edit && <IconPencil size="18" color="gray" onClick={() => setEdit(true)}/>}
-                        {edit && <IconChecks size="18" color="gray" onClick={() => setEdit(false)}/>}
+                        {edit && <IconChecks size="18" color="gray" onClick={() => updateLink()}/>}
+                        {edit && <IconTrash size="18" color="gray" onClick={props.deleteLink}/>}
                     </Group>
 
                     <Text size="sm" color="dimmed">
@@ -29,7 +37,8 @@ function LinkCard(props) {
                             variant="unstyled"
                             radius="xs"
                             size="xs"
-                            value={props.link}
+                            value={link === undefined ? props.link : link}
+                            onChange={e => setLink(e.target.value)}
                         />}
                     </Text>
                 </div>

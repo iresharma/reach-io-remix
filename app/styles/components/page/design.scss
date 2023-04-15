@@ -1,0 +1,94 @@
+@mixin design-section {
+  padding: 0 2em;
+  margin-top: 2em;
+
+  border: 1px solid #c4c4c4;
+  border-radius: 20px;
+
+  h1 {
+    margin-bottom: 0;
+  }
+
+  small {
+    color: gray;
+  }
+}
+
+
+.design-preview {
+  position: fixed;
+  padding: 50px;
+
+  iframe {
+    height: 70vh;
+    width: 35.75vh;
+    border-radius: 30px;
+    border: 8px solid gray;
+  }
+}
+
+.design {
+  margin-left: 53vh;
+
+  .header-section, .buttons, .font {
+    @include design-section;
+  }
+
+  .buttons {
+    &-list {
+      overflow-y: scroll;
+      height: 47vh;
+      width: calc(100vw - 300px - 70vh);
+
+      display: flex;
+      flex-wrap: wrap;
+
+      gap: 1em;
+
+      margin-bottom: 10px;
+
+      .button-wrapper {
+        width: 200px;
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 150px;
+        cursor: pointer;
+
+        &:hover {
+          border: 2px solid #3b82f6;
+          border-radius: 10px;
+        }
+
+        button {
+          cursor: default;
+        }
+
+        span > code {
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  .header-section {
+    @include design-section;
+
+    .profile {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 1em;
+
+      .inputs {
+        width: 100%;
+      }
+    }
+
+    .icons-wrapper {
+      display: flex;
+      align-items: center;
+    }
+  }
+}

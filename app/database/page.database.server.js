@@ -27,3 +27,9 @@ export const getPageData = (id) => {
       prisma.page.findUnique({ where: { id: id } }).then(resolve).catch(reject);
   });
 }
+
+export const updatePageData = (id, data) => {
+    return new Promise((resolve, reject) => {
+        prisma.page.update({ where: { id: id }, data: {links: data} }).then(resolve).catch(reject)
+    })
+}
