@@ -36,7 +36,7 @@ export const loader = async ({ request }) => {
 export default function PageIndexContent() {
   const pageData = useLoaderData();
 
-  const [active, setActive] = useState(1);
+  const [active, setActive] = useState(0);
 
   return (
     <div>
