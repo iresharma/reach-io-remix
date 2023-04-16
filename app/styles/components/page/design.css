@@ -6,22 +6,28 @@
   height: 70vh;
   width: 35.75vh;
   border-radius: 30px;
-  border: 8px solid gray;
+  border: 8px solid #100f0f;
 }
 
 .design {
   margin-left: 53vh;
 }
-.design .header-section, .design .buttons, .design .font {
+.design .header-section,
+.design .buttons,
+.design .font {
   padding: 0 2em;
   margin-top: 2em;
   border: 1px solid #c4c4c4;
   border-radius: 20px;
 }
-.design .header-section h1, .design .buttons h1, .design .font h1 {
+.design .header-section h1,
+.design .buttons h1,
+.design .font h1 {
   margin-bottom: 0;
 }
-.design .header-section small, .design .buttons small, .design .font small {
+.design .header-section small,
+.design .buttons small,
+.design .font small {
   color: gray;
 }
 .design .buttons-list {
@@ -32,6 +38,7 @@
   flex-wrap: wrap;
   gap: 1em;
   margin-bottom: 10px;
+  margin-top: 10px;
 }
 .design .buttons-list .button-wrapper {
   width: 200px;
@@ -44,6 +51,10 @@
 }
 .design .buttons-list .button-wrapper:hover {
   border: 2px solid #3b82f6;
+  border-radius: 10px;
+}
+.design .buttons-list .button-wrapper#selected-btn {
+  border: 4px solid #7a00ff;
   border-radius: 10px;
 }
 .design .buttons-list .button-wrapper button {
@@ -76,4 +87,7 @@
 .design .header-section .icons-wrapper {
   display: flex;
   align-items: center;
+}
+.design .font {
+  padding-bottom: 20px;
 }

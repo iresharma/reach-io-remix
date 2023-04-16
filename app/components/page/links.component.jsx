@@ -13,7 +13,7 @@ const Links = ({ pageData }) => {
     useEffect(() => {
         setSaving(true);
         const updateData = async () => {
-            Axios.post("/page/handler", { links: state })
+            Axios.patch("/page/handler", { links: state })
                 .then(() => setSaving(false))
                 .catch((error) => {
                     setSaving(false);
@@ -46,9 +46,7 @@ const Links = ({ pageData }) => {
     return (
         <main className="grid">
             <div className="preview">
-                <iframe
-                    src={"https://iresharma.vercel.app"}
-                />
+                <iframe src={`https://reach-page-server.vercel.app/${pageData.route}`} />
             </div>
             <div className="links">
                 <h1>Links</h1>

@@ -1,7 +1,7 @@
 import { Button } from "@mantine/core";
 import { IconExternalLink } from "@tabler/icons";
 
-export function PageToolbar({ updateActive, active }) {
+export function PageToolbar({ updateActive, active, route }) {
   return (
     <nav className="page-toolBar">
       <div className="left">
@@ -40,7 +40,7 @@ export function PageToolbar({ updateActive, active }) {
       </div>
 
       <div className="right">
-        <Button variant="subtle" size="sm" color="gray">
+        <Button component="a" href={`https://reach-page-server.vercel.app/${route}`} variant="subtle" size="sm" color="gray">
           Visit <IconExternalLink size={12} />
         </Button>
       </div>

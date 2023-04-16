@@ -36,13 +36,13 @@ export const loader = async ({ request }) => {
 export default function PageIndexContent() {
   const pageData = useLoaderData();
 
-  const [active, setActive] = useState(1);
+  const [active, setActive] = useState(0);
 
   return (
     <div>
-      <PageToolbar active={active} updateActive={setActive} />
+      <PageToolbar active={active} updateActive={setActive} route={pageData.route} />
       {active === 0 && <Links pageData={pageData}/>}
-      {active === 1 && <DesignComponent />}
+      {active === 1 && <DesignComponent {...pageData.template} route={pageData.route}/>}
     </div>
   );
 }
