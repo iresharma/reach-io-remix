@@ -31,7 +31,8 @@
 
   .header-section,
   .buttons,
-  .font {
+  .font,
+  .seo {
     @include design-section;
   }
 
@@ -81,7 +82,6 @@
   }
 
   .header-section {
-    @include design-section;
 
     .profile {
       display: flex;

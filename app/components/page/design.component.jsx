@@ -5,11 +5,16 @@ import {
   Badge,
   Divider,
   Alert,
+  Table,
+  Select,
+  Card,
+  Button,
 } from "@mantine/core";
 import { useState } from "react";
 import Axios from "axios";
-import { IconAlertCircle } from "@tabler/icons";
+import { IconAlertCircle, IconRowInsertTop } from "@tabler/icons";
 import ColorSelector from "~/components/page/colorSelector.component";
+import { useListState } from "@mantine/hooks";
 
 const buttons = [
   "button-1",
@@ -35,6 +40,7 @@ const DesignComponent = (props) => {
   const [background, setBackground] = useState(props.background ?? "");
   const [font, setFont] = useState(props.font ?? "");
   const [fontColor, setFontColor] = useState(props.fontColor ?? "#25262b");
+  const [metaTags, handlers] = useListState(props.meta ?? [{}]);
 
   const updateTemplate = (buttonVal) => {
     const template = {
@@ -153,6 +159,73 @@ const DesignComponent = (props) => {
               }}
             />
           </div>
+        </div>
+        <div className="seo">
+          <h1>Custom SEO Tags</h1>
+          <small>Please select the font for Header section</small>
+          <Table>
+            <thead>
+              <tr>
+                <th>Tag</th>
+                <th colSpan={2}>Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              {metaTags.map((el, index) => (
+                <tr key={index}>
+                  <td>
+                    <Select
+                      variant="unstyled"
+                      sx={(theme) => ({ width: "250px" })}
+                      placeholder="Pick one"
+                      data={[
+                        { value: "description", label: "meta:desc" },
+                        { value: "robots", label: "meta:robots" },
+                        { value: "og:title", label: "og:title" },
+                        { value: "og:url", label: "og:url" },
+                        { value: "og:image", label: "og:image" },
+                        { value: "og:type", label: "og:type" },
+                        { value: "og:description", label: "og:description" },
+                        { value: "og:locale", label: "og:locale" },
+                      ]}
+                      value={el.type}
+                      onChange={(e) =>
+                        handlers.setItem(index, {
+                          type: e,
+                          value: metaTags[index].value,
+                        })
+                      }
+                    />
+                  </td>
+                  <td colSpan={2}>
+                    <TextInput
+                      variant="unstyled"
+                      placeholder="value"
+                      value={el.value}
+                      onChange={(e) =>
+                        handlers.setItem(index, {
+                          value: e.target.value,
+                          type: metaTags[index].type,
+                        })
+                      }
+                    />
+                  </td>
+                </tr>
+              ))}
+              <tr>
+                <Button
+                  variant="subtle"
+                  radius="xs"
+                  onClick={() =>
+                    handlers.append({ type: undefined, value: "" })
+                  }
+                  mt={20}
+                >
+                  Add Item
+                </Button>
+              </tr>
+            </tbody>
+          </Table>
         </div>
       </div>
     </main>
