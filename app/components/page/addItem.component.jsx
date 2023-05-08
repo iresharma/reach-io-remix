@@ -1,4 +1,4 @@
-import {Card, Group} from "@mantine/core";
+import {Card, Group, Badge} from "@mantine/core";
 import {IconApps, IconRowInsertTop} from "@tabler/icons";
 
 const AddItem = ({ addLink, addWidget }) => (
@@ -50,6 +50,7 @@ const AddItem = ({ addLink, addWidget }) => (
         >
             <IconApps />
             &nbsp; Add Widget
+            <Badge size="xs" ml={20} color="orange" leftSection={"🔥"}>Coming soon</Badge>
         </Card>
     </Group>
 );
