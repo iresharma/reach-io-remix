@@ -2,11 +2,6 @@ import { prisma } from "./index.database.server";
 
 export const initializePage = ({ account_name, id }) => {
   return new Promise((resolve, reject) => {
-    console.log({
-      route: `/${account_name}`,
-      template: {},
-      userAccountId: id,
-    });
     prisma.page
       .create({
         data: {

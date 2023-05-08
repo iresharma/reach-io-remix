@@ -84,6 +84,14 @@ export const action = async ({ request }) => {
   let userData = session.get("account");
   const data = await initializePage(userData);
   session.set("account", data);
+  await fetch("reach-page-server.vercel.app/api/revalidate",{
+    method: "POST",
+    cache: "no-cache",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ route: userData.account_name })
+  })
   return redirect("/page", {
     headers: {
       "Set-Cookie": await commitSession(session),
